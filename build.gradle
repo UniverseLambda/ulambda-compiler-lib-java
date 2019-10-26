@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+group 'universe.lambda.ulcc'
+version '0.1'
+
+compileJava {
+    sourceCompatibility = 10
+    targetCompatibility = 10
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
+}
+
+test {
+    useJUnitPlatform()
+}
