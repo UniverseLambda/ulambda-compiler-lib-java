@@ -5,7 +5,7 @@ This version is for the Java platform. More language may be targeted in the futu
 
 It is really nothing but a lexer now, but more features are on the way!
 
-## Build instructions
+## Build instructions
 
 ### Prerequisites
 
