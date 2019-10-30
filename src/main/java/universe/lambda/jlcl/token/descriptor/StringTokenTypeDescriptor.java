@@ -26,11 +26,37 @@ public class StringTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
 
 	@Override
 	public boolean correspond(String value) {
-		return value.startsWith("\"") && value.endsWith("\"");
+		if(!value.startsWith("\"") || !value.endsWith("\"")) return false;
+		return analyse(value, false);
 	}
 
 	@Override
 	public boolean mayCorrespond(String value) {
-		return value.startsWith("\"");
+		if(!value.startsWith("\"")) return false;
+		return analyse(value, true);
+	}
+
+	private static boolean analyse(String value, boolean defaultReturn) {
+		boolean skipPrevious = false;
+
+		for(int i = 1; i < value.length(); i++) {
+			if(skipPrevious) {
+				skipPrevious = false;
+				continue;
+			}
+
+			int cp = value.codePointAt(i);
+
+			if(cp == '\\') {
+				skipPrevious = true;
+				continue;
+			}
+
+			if(cp == '\"') {
+				return i + 1 == value.length();
+			}
+		}
+
+		return defaultReturn;
 	}
 }

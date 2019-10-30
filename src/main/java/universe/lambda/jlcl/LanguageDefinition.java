@@ -145,7 +145,7 @@ public class LanguageDefinition {
 			if(!desc.containsKey(INTEGER))		desc.put(INTEGER, new IntegerTokenTypeDescriptor(INTEGER));
 			if(!desc.containsKey(FLOAT))		desc.put(FLOAT, new FloatTokenTypeDescriptor(FLOAT));
 			if(!desc.containsKey(CHAR))			desc.put(CHAR, new CharTokenTypeDescriptor(CHAR));
-			if(!desc.containsKey(STRING))		desc.put(STRING, new CharTokenTypeDescriptor(STRING));
+			if(!desc.containsKey(STRING))		desc.put(STRING, new StringTokenTypeDescriptor(STRING));
 
 			var def = new LanguageDefinition();
 			// we don't want modifications of this Builder HashMap to modify the LanguageDefinition HashMap.

@@ -108,7 +108,7 @@ public class Tokenizer {
 				read();
 			}
 
-			if (next == ';') {
+			if (next == '#') {
 				while (next != '\n' && next != '\r') {
 					if (loop > 1000) break;
 					read();
@@ -133,6 +133,7 @@ public class Tokenizer {
 				continue;
 			}
 
+
 			buff.setLength(buff.length() - 1);
 
 			finish();
@@ -151,6 +152,7 @@ public class Tokenizer {
 
 	private void finish() {
 		final var content = buff.toString();
+		// System.out.println("CONTENT: " + content);
 		if(content.length() == 0) {
 			mode = MODE_ERROR;
 			Logger.error("tried to finish with an empty buffer");
