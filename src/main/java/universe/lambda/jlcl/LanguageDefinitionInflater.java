@@ -74,7 +74,7 @@ public class LanguageDefinitionInflater {
                         Logger.fatal(
                                 current.getSource()
                                         + ":" + id.getLine() + ":" + id.getColumn()
-                                        + "invalid token: '" + id.getValue() + "'"
+                                        + ": invalid token: '" + id.getValue() + "'"
                         );
                         return null;
                 }
@@ -86,7 +86,7 @@ public class LanguageDefinitionInflater {
                     Logger.fatal(
                             current.getSource()
                                     + ":" + value.getLine() + ":" + value.getColumn()
-                                    + "invalid token: '" + value.getValue() + "'"
+                                    + ": invalid token: '" + value.getValue() + "'"
                     );
                     return null;
                 }
@@ -94,8 +94,6 @@ public class LanguageDefinitionInflater {
 
                 String sValue = value.getValue();
                 sValue = sValue.substring(1, sValue.length() - 1);
-
-                System.out.println("Adding token [\"" + id.getValue() + "\": \"" + sValue + "\"]");
 
                 builder.addTokenType(id.getValue(), sValue);
             }

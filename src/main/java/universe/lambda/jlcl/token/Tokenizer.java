@@ -47,6 +47,12 @@ public class Tokenizer {
 	 */
 	private static final int MODE_ERROR = 2;
 
+	/**
+	 * {@code Tokenizer} mode in which the {@code Tokenizer} stop accumulating code points and return {@code null}.
+	 * It Indicates that it cannot issue another {@code Token} because it has reached the end of the stream.
+	*/
+	private static final int MODE_EOS = 3;
+
 	private final LanguageDefinition def;
 	private final Reader src;
 	private final String srcName;
@@ -98,6 +104,8 @@ public class Tokenizer {
 	 * @return read {@code Token}, {@code null} if an error happened.
 	 */
 	public Token readToken() {
+		if(mode == MODE_EOS) return null;
+
 		mode = MODE_STANDBY;
 		result = null;
 
@@ -154,6 +162,10 @@ public class Tokenizer {
 		final var content = buff.toString();
 		// System.out.println("CONTENT: " + content);
 		if(content.length() == 0) {
+			if(next == -1) {
+				mode = MODE_EOS;
+				return;
+			}
 			mode = MODE_ERROR;
 			Logger.error("tried to finish with an empty buffer");
 			return;
