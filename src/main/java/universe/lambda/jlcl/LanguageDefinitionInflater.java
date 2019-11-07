@@ -27,8 +27,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class LanguageDefinitionInflater {
+    /**
+     * {@code LanguageDefinition} used by the {@code LanguageDefinitionInflater}
+     * to inflate files.
+    */
     private static LanguageDefinition inflaterDef;
 
+    /**
+     * @param path Path to the file to inflate
+     * @return the inflated {@code LanguageDefinition} if the process has been
+     * successful, {@code null} otherwise.
+    */
     public static LanguageDefinition inflate(Path path) {
         init();
 
@@ -102,6 +111,9 @@ public class LanguageDefinitionInflater {
         return builder.build();
     }
 
+    /**
+     * Initialize the inflater {@code LanguageDefinition}.
+    */
     private static void init() {
         if(inflaterDef != null) return;
 
