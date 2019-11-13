@@ -132,8 +132,7 @@ public class Tokenizer {
 			if(next != -1) {
 				buff.appendCodePoint(next);
 			} else {
-				if(buff.length() == 0) finish();
-				continue;
+				finish();
 			}
 
 			if(mayToken()) {
@@ -167,15 +166,25 @@ public class Tokenizer {
 				return;
 			}
 			mode = MODE_ERROR;
-			Logger.error("tried to finish with an empty buffer");
+			// Logger.error("tried to finish with an empty buffer");
+			logerr(
+					new StringBuilder("unexpected character: ").appendCodePoint(next).toString(),
+					false
+			);
 			return;
 		}
 
 		var ttd = def.getTokenTypeDescriptorByValue(content);
 
 		if(ttd == null) {
-			mode = MODE_ERROR;
 			result = null;
+			if(next == -1) {
+				logerr("unexpected end of file", false);
+				mode = MODE_EOS;
+				return;
+			}
+			logerr("unexpected token: " + content);
+			mode = MODE_ERROR;
 		} else {
 			result = ttd.makeToken(content, srcName, startLine, startCol);
 			mode = MODE_DONE;
@@ -201,5 +210,13 @@ public class Tokenizer {
 		}
 
 		next = curr;
+	}
+
+	private void logerr(String message) {
+		logerr(message, true);
+	}
+
+	private void logerr(String message, boolean startOfToken) {
+		Logger.error(srcName + ":" + (startOfToken ? startLine : line) + ":" + (startOfToken ? startCol : col) + ": " + message);
 	}
 }

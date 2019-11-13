@@ -15,24 +15,20 @@
 
 	You should have received a copy of the GNU General Public License
 	along with the uLambda Compiler Library.  If not, see <https://www.gnu.org/licenses/>.
- */
+  */
 
-package universe.lambda.jlcl.token.descriptor;
+package universe.lambda.jlcl.feature;
 
-import universe.lambda.jlcl.utils.NumberUtil;
+import universe.lambda.jlcl.LanguageDefinition;
+import universe.lambda.jlcl.token.descriptor.IdentifierTokenTypeDescriptor;
 
-public class IntegerTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
-	public IntegerTokenTypeDescriptor() {
-		super("INTEGER");
+public class IdentifierFeature extends AbstractFeature {
+	public IdentifierFeature() {
+		super("identifier");
 	}
 
 	@Override
-	public boolean mayCorrespond(String value) {
-		return NumberUtil.isInteger(value);
-	}
-
-	@Override
-	public boolean correspond(String value) {
-		return NumberUtil.isInteger(value);
+	public void apply(LanguageDefinition.Builder builder) {
+		builder.addTokenType(new IdentifierTokenTypeDescriptor());
 	}
 }

@@ -19,6 +19,7 @@
 
 module universe.lambda.jlcl {
     exports universe.lambda.jlcl;
+    exports universe.lambda.jlcl.feature;
     exports universe.lambda.jlcl.token;
     exports universe.lambda.jlcl.token.descriptor;
     exports universe.lambda.jlcl.utils;

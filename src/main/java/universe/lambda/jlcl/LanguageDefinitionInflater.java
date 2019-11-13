@@ -89,8 +89,8 @@ public class LanguageDefinitionInflater {
                 }
 
                 if(
-                        !value.getDescriptor().getName().equals(LanguageDefinition.STRING) &&
-                        !value.getDescriptor().getName().equals(LanguageDefinition.CHAR)
+                        !value.getDescriptor().getName().equals("STRING") &&
+                        !value.getDescriptor().getName().equals("CHAR")
                 ) {
                     Logger.fatal(
                             current.getSource()

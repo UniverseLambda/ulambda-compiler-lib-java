@@ -20,8 +20,8 @@
 package universe.lambda.jlcl.token.descriptor;
 
 public class CharTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
-	public CharTokenTypeDescriptor(String name) {
-		super(name);
+	public CharTokenTypeDescriptor() {
+		super("CHAR");
 	}
 
 	@Override
