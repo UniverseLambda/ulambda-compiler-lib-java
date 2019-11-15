@@ -19,6 +19,7 @@
 
 package universe.lambda.jlcl;
 
+import universe.lambda.jlcl.feature.FeatureList;
 import universe.lambda.jlcl.token.Token;
 import universe.lambda.jlcl.token.Tokenizer;
 
@@ -63,6 +64,8 @@ public class LanguageDefinitionInflater {
 
         LanguageDefinition.Builder builder = new LanguageDefinition.Builder();
 
+	    FeatureList.Builder features = new FeatureList.Builder();
+
         for(int i = 0; i < tokens.length; i++) {
             Token current = tokens[i];
             if(current.getValue().equals("token")) {
@@ -105,10 +108,35 @@ public class LanguageDefinitionInflater {
                 sValue = sValue.substring(1, sValue.length() - 1);
 
                 builder.addTokenType(id.getValue(), sValue);
+            } else if(current.getValue().equalsIgnoreCase("enable") || current.getValue().equalsIgnoreCase("disable")) {
+                if(i + 1 >= tokens.length) {
+                    Logger.fatal(
+                            current.getSource()
+                                    + ":" + current.getLine() + ":" + current.getColumn()
+                                    + ": missing tokens after '"
+                                    + current.getValue()
+                                    + "'");
+                    return null;
+                }
+                Token featureName = tokens[++i];
+
+                if(!featureName.getDescriptor().getName().equals("IDENTIFIER")) {
+	                Logger.fatal(
+			                featureName.getSource()
+					                + ":" + featureName.getLine() + ":" + featureName.getColumn()
+					                + ": unexpected token '"
+					                + featureName.getValue()
+					                + "'");
+                	return null;
+                }
+
+                String strFeatureName = featureName.getValue();
+
+	            features.setFeatureEnabled(strFeatureName, current.getValue().equalsIgnoreCase("enable"));
             }
         }
 
-        return builder.build();
+        return builder.setFeatureList(features.build()).build();
     }
 
     /**

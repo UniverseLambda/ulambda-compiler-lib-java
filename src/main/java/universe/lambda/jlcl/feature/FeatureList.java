@@ -21,7 +21,9 @@ package universe.lambda.jlcl.feature;
 
 import universe.lambda.jlcl.LanguageDefinition;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class FeatureList {
 	private Feature[] features;
@@ -32,7 +34,8 @@ public class FeatureList {
 
 	public void apply(LanguageDefinition.Builder builder) {
 		for(var curr: features) {
-			curr.apply(builder);
+			if(curr.isEnabled())
+				curr.apply(builder);
 		}
 	}
 
@@ -65,6 +68,15 @@ public class FeatureList {
 			return this;
 		}
 
+		public Builder disableDefaults() {
+			disableFeature("identifier");
+			disableFeature("character");
+			disableFeature("string");
+			disableFeature("integer");
+			disableFeature("float");
+			return this;
+		}
+
 		public Builder enableAll() {
 			for(var curr: featureList.values()) {
 				curr.setEnabled(true);
@@ -90,6 +102,22 @@ public class FeatureList {
 		}
 
 		public Builder setFeatureEnabled(String featureName, boolean value) {
+			if(featureName.equalsIgnoreCase("all")) {
+				if(value)
+					enableAll();
+				else
+					disableAll();
+				return this;
+			}
+
+			if(featureName.equalsIgnoreCase("defaults") || featureName.equalsIgnoreCase("default")) {
+				if(value)
+					enableDefaults();
+				else
+					disableDefaults();
+				return this;
+			}
+
 			if(!featureList.containsKey(featureName)) {
 				throw new IllegalArgumentException("Feature " + featureName + " not found");
 			}
@@ -98,10 +126,14 @@ public class FeatureList {
 		}
 
 		public FeatureList build() {
+			List<Feature> enabled = new ArrayList<>();
+
 			for(var curr: featureList.keySet()) {
-				if(!featureList.get(curr).isEnabled()) featureList.remove(curr);
+				if(featureList.get(curr).isEnabled())
+					enabled.add(featureList.get(curr));
 			}
-			return new FeatureList(featureList.values().toArray(new Feature[0]));
+
+			return new FeatureList(enabled.toArray(new Feature[0]));
 		}
 	}
 }
