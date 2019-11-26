@@ -92,10 +92,17 @@ public class LanguageDefinition {
 	 * @return the TokenTypeDescriptor if found, null otherwise.
 	 */
 	public TokenTypeDescriptor getTokenTypeDescriptorByValue(String value) {
+		TokenTypeDescriptor retained = null;
 		for(var curr : descriptors.values()) {
-			if(curr.correspond(value)) return curr;
+			if(curr.correspond(value)) {
+				if(curr.getName().equalsIgnoreCase(IDENTIFIER)) {
+					retained = curr;
+					continue;
+				}
+				return curr;
+			}
 		}
-		return null;
+		return retained;
 	}
 
 	/**

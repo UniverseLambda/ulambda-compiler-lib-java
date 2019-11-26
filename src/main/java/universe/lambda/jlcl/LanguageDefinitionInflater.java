@@ -40,6 +40,7 @@ public class LanguageDefinitionInflater {
      * successful, {@code null} otherwise.
     */
     public static LanguageDefinition inflate(Path path) {
+        Logger.debug("inflating LanguageDefinition...");
         init();
 
         if(!Files.isRegularFile(path)) {
@@ -68,6 +69,7 @@ public class LanguageDefinitionInflater {
 
         for(int i = 0; i < tokens.length; i++) {
             Token current = tokens[i];
+            Logger.debug("processing token " + i + "/" + (tokens.length - 1) + " '" + current.getValue() + "'");
             if(current.getValue().equals("token")) {
                 if(i + 2 >= tokens.length) {
                     Logger.fatal(
@@ -80,7 +82,9 @@ public class LanguageDefinitionInflater {
                 }
 
                 Token id = tokens[++i];
+                Logger.debug("processing token " + i + "/" + (tokens.length - 1) + " '" + id.getValue() + "'");
                 Token value = tokens[++i];
+                Logger.debug("processing token " + i + "/" + (tokens.length - 1) + " '" + value.getValue() + "'");
 
                 if(!id.getDescriptor().getName().equals(LanguageDefinition.IDENTIFIER)) {
                         Logger.fatal(
@@ -135,6 +139,8 @@ public class LanguageDefinitionInflater {
 	            features.setFeatureEnabled(strFeatureName, current.getValue().equalsIgnoreCase("enable"));
             }
         }
+
+        Logger.debug("done inflating!");
 
         return builder.setFeatureList(features.build()).build();
     }

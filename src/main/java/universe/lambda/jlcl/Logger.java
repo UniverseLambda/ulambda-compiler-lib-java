@@ -76,6 +76,7 @@ public class Logger {
 		public String value;
 
 		LogLevel(int position, String value) {
+			this.position = position;
 			this.value = value;
 		}
 	}
