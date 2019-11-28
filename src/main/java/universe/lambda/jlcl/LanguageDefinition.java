@@ -15,11 +15,13 @@
 
 	You should have received a copy of the GNU General Public License
 	along with the uLambda Compiler Library.  If not, see <https://www.gnu.org/licenses/>.
- */
+	*/
 
 package universe.lambda.jlcl;
 
-import universe.lambda.jlcl.token.descriptor.*;
+import universe.lambda.jlcl.feature.FeatureList;
+import universe.lambda.jlcl.token.descriptor.DefinedTokenTypeDescriptor;
+import universe.lambda.jlcl.token.descriptor.TokenTypeDescriptor;
 
 import java.util.HashMap;
 
@@ -42,11 +44,6 @@ public class LanguageDefinition {
 	 * Name of the char TokenDescriptor
 	 */
 	public static final String CHAR = "CHAR";
-
-	/**
-	 * Name of the string TokenDescriptor
-	 */
-	public static final String STRING = "STRING";
 
 	/**
 	 * Name of the string TokenDescriptor
@@ -95,10 +92,17 @@ public class LanguageDefinition {
 	 * @return the TokenTypeDescriptor if found, null otherwise.
 	 */
 	public TokenTypeDescriptor getTokenTypeDescriptorByValue(String value) {
+		TokenTypeDescriptor retained = null;
 		for(var curr : descriptors.values()) {
-			if(curr.correspond(value)) return curr;
+			if(curr.correspond(value)) {
+				if(curr.getName().equalsIgnoreCase(IDENTIFIER)) {
+					retained = curr;
+					continue;
+				}
+				return curr;
+			}
 		}
-		return null;
+		return retained;
 	}
 
 	/**
@@ -114,7 +118,12 @@ public class LanguageDefinition {
 	 * Class for creating a LanguageDefinition.
 	 */
 	public static class Builder {
-		HashMap<String, TokenTypeDescriptor> desc = new HashMap<>();
+		private FeatureList featureList;
+		private HashMap<String, TokenTypeDescriptor> desc = new HashMap<>();
+
+		public Builder() {
+			featureList = new FeatureList.Builder().enableDefaults().build();
+		}
 
 		/**
 		 * Add a {@code DefinedTokenTypeDescriptor} with specified parameters.
@@ -136,16 +145,19 @@ public class LanguageDefinition {
 			return this;
 		}
 
+		public Builder setFeatureList(FeatureList featureList) {
+			this.featureList = featureList;
+			return this;
+		}
+
 		/**
 		 * Build the LanguageDefinition.
 		 * @return the built LanguageDefinition.
 		 */
 		public LanguageDefinition build() {
-			if(!desc.containsKey(IDENTIFIER))	desc.put(IDENTIFIER, new IdentifierTokenTypeDescriptor(IDENTIFIER));
-			if(!desc.containsKey(INTEGER))		desc.put(INTEGER, new IntegerTokenTypeDescriptor(INTEGER));
-			if(!desc.containsKey(FLOAT))		desc.put(FLOAT, new FloatTokenTypeDescriptor(FLOAT));
-			if(!desc.containsKey(CHAR))			desc.put(CHAR, new CharTokenTypeDescriptor(CHAR));
-			if(!desc.containsKey(STRING))		desc.put(STRING, new StringTokenTypeDescriptor(STRING));
+			if(featureList != null) {
+				featureList.apply(this);
+			}
 
 			var def = new LanguageDefinition();
 			// we don't want modifications of this Builder HashMap to modify the LanguageDefinition HashMap.

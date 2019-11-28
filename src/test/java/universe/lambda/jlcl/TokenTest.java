@@ -27,8 +27,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TokenTest {
-	private final FloatTokenTypeDescriptor floatTTD = new FloatTokenTypeDescriptor("FLOAT");
-	private final IntegerTokenTypeDescriptor intTTD = new IntegerTokenTypeDescriptor("INTEGER");
+	private final FloatTokenTypeDescriptor floatTTD = new FloatTokenTypeDescriptor();
+	private final IntegerTokenTypeDescriptor intTTD = new IntegerTokenTypeDescriptor();
 
 	private final String[] validFloats = {
 			"16F", "16f",

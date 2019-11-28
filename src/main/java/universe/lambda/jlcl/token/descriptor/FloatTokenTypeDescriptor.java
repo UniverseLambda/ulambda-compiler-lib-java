@@ -24,12 +24,12 @@ import universe.lambda.jlcl.utils.NumberUtil;
 public class FloatTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
 	private String[] floatSuffix;
 
-	public FloatTokenTypeDescriptor(String name) {
-		this(name, new String[]{"F", "f", "D", "d"});
+	public FloatTokenTypeDescriptor() {
+		this(new String[]{"F", "f", "D", "d"});
 	}
 
-	public FloatTokenTypeDescriptor(String name, String[] suffixes) {
-		super(name);
+	public FloatTokenTypeDescriptor(String[] suffixes) {
+		super("FLOAT");
 		this.floatSuffix = (suffixes == null ? new String[0] : suffixes);
 	}
 

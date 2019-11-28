@@ -15,24 +15,46 @@
 
 	You should have received a copy of the GNU General Public License
 	along with the uLambda Compiler Library.  If not, see <https://www.gnu.org/licenses/>.
- */
+  */
 
-package universe.lambda.jlcl.token.descriptor;
+package universe.lambda.jlcl.feature;
 
-import universe.lambda.jlcl.utils.NumberUtil;
+import java.util.HashMap;
 
-public class IntegerTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
-	public IntegerTokenTypeDescriptor() {
-		super("INTEGER");
+public abstract class AbstractFeature implements Feature {
+	private final String name;
+	private boolean enabled;
+
+	private HashMap<String, String> data = new HashMap<>();
+
+	public AbstractFeature(String name) {
+		this.name = name;
+		this.enabled = false;
 	}
 
 	@Override
-	public boolean mayCorrespond(String value) {
-		return NumberUtil.isInteger(value);
+	public String getName() {
+		return name;
 	}
 
 	@Override
-	public boolean correspond(String value) {
-		return NumberUtil.isInteger(value);
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setData(String key, String value) {
+		data.put(key, value);
+	}
+
+	@Override
+	public String getData(String key, String defaultValue) {
+		if (data.containsKey(key)) return data.get(key);
+		return defaultValue;
 	}
 }

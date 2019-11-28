@@ -20,8 +20,8 @@
 package universe.lambda.jlcl.token.descriptor;
 
 public class IdentifierTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
-	public IdentifierTokenTypeDescriptor(String name) {
-		super(name);
+	public IdentifierTokenTypeDescriptor() {
+		super("IDENTIFIER");
 	}
 
 	@Override

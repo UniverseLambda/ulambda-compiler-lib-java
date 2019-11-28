@@ -124,7 +124,7 @@ public class Tokenizer {
 				}
 				read();
 			}
-		} while (Character.isWhitespace(next));
+		} while (Character.isWhitespace(next) || next == '#');
 
 		startCol = col;
 		startLine = line;
@@ -132,8 +132,7 @@ public class Tokenizer {
 			if(next != -1) {
 				buff.appendCodePoint(next);
 			} else {
-				if(buff.length() == 0) finish();
-				continue;
+				finish();
 			}
 
 			if(mayToken()) {
@@ -141,10 +140,15 @@ public class Tokenizer {
 				continue;
 			}
 
-
 			buff.setLength(buff.length() - 1);
 
 			finish();
+		}
+
+		if(result != null) {
+			debug("TOKEN '" + result.getValue() + "' (" + result.getDescriptor().getName() + ")");
+		} else {
+			debug("TOKEN null (none)");
 		}
 
 		return result;
@@ -160,22 +164,30 @@ public class Tokenizer {
 
 	private void finish() {
 		final var content = buff.toString();
-		// System.out.println("CONTENT: " + content);
 		if(content.length() == 0) {
 			if(next == -1) {
 				mode = MODE_EOS;
 				return;
 			}
 			mode = MODE_ERROR;
-			Logger.error("tried to finish with an empty buffer");
+			logerr(
+					new StringBuilder("unexpected character: ").appendCodePoint(next).toString(),
+					false
+			);
 			return;
 		}
 
 		var ttd = def.getTokenTypeDescriptorByValue(content);
 
 		if(ttd == null) {
-			mode = MODE_ERROR;
 			result = null;
+			if(next == -1) {
+				logerr("unexpected end of file", false);
+				mode = MODE_EOS;
+				return;
+			}
+			logerr("unexpected token: " + content);
+			mode = MODE_ERROR;
 		} else {
 			result = ttd.makeToken(content, srcName, startLine, startCol);
 			mode = MODE_DONE;
@@ -185,7 +197,7 @@ public class Tokenizer {
 	}
 
 	private void read() {
-		var curr = -1;
+		int curr = -1;
 		try {
 			curr = src.read();
 		} catch (IOException e) {
@@ -201,5 +213,25 @@ public class Tokenizer {
 		}
 
 		next = curr;
+	}
+
+	private void debug(String message) {
+		debug(message, true);
+	}
+
+	private void debug(String message, boolean startOfToken) {
+		Logger.debug(getLogMsg(message, startOfToken));
+	}
+
+	private void logerr(String message) {
+		logerr(message, true);
+	}
+
+	private void logerr(String message, boolean startOfToken) {
+		Logger.error(getLogMsg(message, startOfToken));
+	}
+
+	private String getLogMsg(String message, boolean startOfToken) {
+		return srcName + ":" + (startOfToken ? startLine : line) + ":" + (startOfToken ? startCol : col) + ": " + message;
 	}
 }

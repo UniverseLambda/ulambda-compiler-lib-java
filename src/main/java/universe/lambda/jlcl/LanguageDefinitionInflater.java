@@ -19,6 +19,7 @@
 
 package universe.lambda.jlcl;
 
+import universe.lambda.jlcl.feature.FeatureList;
 import universe.lambda.jlcl.token.Token;
 import universe.lambda.jlcl.token.Tokenizer;
 
@@ -39,6 +40,7 @@ public class LanguageDefinitionInflater {
      * successful, {@code null} otherwise.
     */
     public static LanguageDefinition inflate(Path path) {
+        Logger.debug("inflating LanguageDefinition...");
         init();
 
         if(!Files.isRegularFile(path)) {
@@ -63,8 +65,11 @@ public class LanguageDefinitionInflater {
 
         LanguageDefinition.Builder builder = new LanguageDefinition.Builder();
 
+	    FeatureList.Builder features = new FeatureList.Builder();
+
         for(int i = 0; i < tokens.length; i++) {
             Token current = tokens[i];
+            Logger.debug("processing token " + i + "/" + (tokens.length - 1) + " '" + current.getValue() + "'");
             if(current.getValue().equals("token")) {
                 if(i + 2 >= tokens.length) {
                     Logger.fatal(
@@ -77,7 +82,9 @@ public class LanguageDefinitionInflater {
                 }
 
                 Token id = tokens[++i];
+                Logger.debug("processing token " + i + "/" + (tokens.length - 1) + " '" + id.getValue() + "'");
                 Token value = tokens[++i];
+                Logger.debug("processing token " + i + "/" + (tokens.length - 1) + " '" + value.getValue() + "'");
 
                 if(!id.getDescriptor().getName().equals(LanguageDefinition.IDENTIFIER)) {
                         Logger.fatal(
@@ -89,8 +96,8 @@ public class LanguageDefinitionInflater {
                 }
 
                 if(
-                        !value.getDescriptor().getName().equals(LanguageDefinition.STRING) &&
-                        !value.getDescriptor().getName().equals(LanguageDefinition.CHAR)
+                        !value.getDescriptor().getName().equals("STRING") &&
+                        !value.getDescriptor().getName().equals("CHAR")
                 ) {
                     Logger.fatal(
                             current.getSource()
@@ -105,10 +112,37 @@ public class LanguageDefinitionInflater {
                 sValue = sValue.substring(1, sValue.length() - 1);
 
                 builder.addTokenType(id.getValue(), sValue);
+            } else if(current.getValue().equalsIgnoreCase("enable") || current.getValue().equalsIgnoreCase("disable")) {
+                if(i + 1 >= tokens.length) {
+                    Logger.fatal(
+                            current.getSource()
+                                    + ":" + current.getLine() + ":" + current.getColumn()
+                                    + ": missing tokens after '"
+                                    + current.getValue()
+                                    + "'");
+                    return null;
+                }
+                Token featureName = tokens[++i];
+
+                if(!featureName.getDescriptor().getName().equals("IDENTIFIER")) {
+	                Logger.fatal(
+			                featureName.getSource()
+					                + ":" + featureName.getLine() + ":" + featureName.getColumn()
+					                + ": unexpected token '"
+					                + featureName.getValue()
+					                + "'");
+                	return null;
+                }
+
+                String strFeatureName = featureName.getValue();
+
+	            features.setFeatureEnabled(strFeatureName, current.getValue().equalsIgnoreCase("enable"));
             }
         }
 
-        return builder.build();
+        Logger.debug("done inflating!");
+
+        return builder.setFeatureList(features.build()).build();
     }
 
     /**
