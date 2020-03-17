@@ -9,3 +9,20 @@ token SEMICOLON ";"
 token ASSIGN "="
 token EQUALS "=="
 token PLUS "+"
+token TRUE "true"
+token FALSE "false"
+
+rule universe::lambda::jlcl::SimpleIf statement IF boolexpr THEN statement ENDIF
+rule universe::lambda::jlcl::IfElse statement IF boolexpr THEN statement ELSE statement ENDIF
+rule universe::lambda::jlcl::Assign statement IDENTIFIER "=" valueexpr
+
+rule universe::lambda::jlcl::ValueExpr valueexpr IDENTIFIER
+rule universe::lambda::jlcl::ValueExpr valueexpr INTEGER
+rule universe::lambda::jlcl::ValueExpr valueexpr FLOAT
+rule universe::lambda::jlcl::ValueExpr valueexpr STRING
+rule universe::lambda::jlcl::ValueExpr valueexpr CHAR
+rule universe::lambda::jlcl::ValueExpr valueexpr boolexpr
+
+rule universe::lambda::jlcl::BoolExpr boolexpr TRUE
+rule universe::lambda::jlcl::BoolExpr boolexpr FALSE
+rule universe::lambda::jlcl::BoolExpr boolexpr valueexpr == valueexpr
