@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -20,10 +20,58 @@
 package universe.lambda.jlcl.token.descriptor;
 
 import universe.lambda.jlcl.token.Token;
+import universe.lambda.jlcl.token.Tokenizer;
 
+/**
+ * The descriptor of a type of {@link Token}.
+ *
+ * A {@code TokenTypeDescriptor} tells the {@link Tokenizer} whenever its buffer is a {@link Token} or at least if it
+ * can become one. It is also used to create corresponding {@code Tokens}.
+ *
+ * @since 0.1
+ */
 public interface TokenTypeDescriptor {
+
+	/**
+	 * Gets the name of this descriptor.
+	 *
+	 * @return the name of this descriptor.
+	 *
+	 * @since  0.1
+	 */
 	String getName();
+
+	/**
+	 * Get whether the input may correspond to this descriptor.
+	 *
+	 * @param value value to check.
+	 * @return {@code true} if the input may correspond to this descriptor, {@code false} otherwise.
+	 *
+	 * @since 0.1
+	 */
 	boolean mayCorrespond(String value);
+
+	/**
+	 * Get whether the input corresponds to this descriptor.
+	 *
+	 * @param value value to check.
+	 * @return {@code true} if the input corresponds to this descriptor, {@code false} otherwise.
+	 *
+	 * @since 0.1
+	 */
 	boolean correspond(String value);
+
+	/**
+	 * Make a {@link Token} from the specified arguments.
+	 *
+	 * @param value {@link String} value of the {@code Token}.
+	 * @param source name of the source from which {@code value} has been read.
+	 * @param line line where {@code value} has been read.
+	 * @param column column where {@code value} has been read.
+	 * @return the created {@code Token}.
+	 *
+	 * @implNote implementations of this method SHOULD check if the {@code value} corresponds to this descriptor and
+	 * return {@code null} if not.
+	 */
 	Token makeToken(String value, String source, int line, int column);
 }

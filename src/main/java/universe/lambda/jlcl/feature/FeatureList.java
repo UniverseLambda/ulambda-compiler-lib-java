@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -25,13 +25,39 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Immutable container for {@code Feature}.<br><br>
+ *
+ * It has a {@code Builder} class used to construct new instances.<br><br>
+ *
+ * @since 0.2
+ */
 public class FeatureList {
+	/**
+	 * The array backing this {@code FeatureList}.
+	 *
+	 * @since 0.2
+	 */
 	private Feature[] features;
 
+	/**
+	 * Private constructor. It is not intended for external consumption.
+	 *
+	 * @param features backing array.
+	 *
+	 * @since 0.2
+	 */
 	private FeatureList(Feature[] features) {
 		this.features = features;
 	}
 
+	/**
+	 * Apply all enabled features of this list to the specified {@code LanguageDefinition} builder.
+	 *
+	 * @param builder builder to apply this list to.
+	 *
+	 * @since 0.2
+	 */
 	public void apply(LanguageDefinition.Builder builder) {
 		for(var curr: features) {
 			if(curr.isEnabled())
@@ -39,14 +65,48 @@ public class FeatureList {
 		}
 	}
 
+	/**
+	 * Builder of {@code FeatureList}. It is the only way to obtain an instance of {@code FeatureList}.<br><br>
+	 *
+	 * By default, it enables some common internal features:
+	 * <ul>
+	 *     <li>identifier ({@link IdentifierFeature})</li>
+	 *     <li>character ({@link CharacterFeature})</li>
+	 *     <li>string ({@link StringFeature})</li>
+	 *     <li>integer ({@link IntegerFeature})</li>
+	 *     <li>float ({@link FloatFeature})</li>
+	 * </ul>
+	 *
+	 * If a feature needs to be enable, it must be first added to this Builder before being enabled.
+	 * Because of this, features can be present in this Builder while being disable.
+	 *
+	 * @since 0.2
+	 */
 	public static class Builder {
+		/**
+		 * HashMap backing the {@code Builder}.
+		 *
+		 * @since 0.2
+		 */
 		private HashMap<String, Feature> featureList = new HashMap<>();
 
+		/**
+		 * Default constructor. It enables all defaults features.
+		 *
+		 * @since 0.2
+		 *
+		 * @see Builder#enableDefaults()
+		 */
 		public Builder() {
 			indexFeatures();
 			enableDefaults();
 		}
 
+		/**
+		 * Indexes internal features.
+		 *
+		 * @since 0.2
+		 */
 		private void indexFeatures() {
 			addFeature(new IdentifierFeature());
 			addFeature(new CharacterFeature());
@@ -55,10 +115,31 @@ public class FeatureList {
 			addFeature(new FloatFeature());
 		}
 
+		/**
+		 * Add a feature to this list.
+		 *
+		 * @param feature feature to add to this list.
+		 *
+		 * @since 0.2
+		 */
 		private void addFeature(Feature feature) {
 			featureList.put(feature.getName(), feature);
 		}
 
+		/**
+		 * Enable defaults features. The default features are:
+		 * <ul>
+		 *     <li>identifier ({@link IdentifierFeature})</li>
+		 *     <li>character ({@link CharacterFeature})</li>
+		 *     <li>string ({@link StringFeature})</li>
+		 *     <li>integer ({@link IntegerFeature})</li>
+		 *     <li>float ({@link FloatFeature})</li>
+		 * </ul>
+		 *
+		 * @return this instance.
+		 *
+		 * @since 0.2
+		 */
 		public Builder enableDefaults() {
 			enableFeature("identifier");
 			enableFeature("character");
@@ -68,6 +149,20 @@ public class FeatureList {
 			return this;
 		}
 
+		/**
+		 * Disable defaults features. The default features are:
+		 * <ul>
+		 *     <li>identifier ({@link IdentifierFeature})</li>
+		 *     <li>character ({@link CharacterFeature})</li>
+		 *     <li>string ({@link StringFeature})</li>
+		 *     <li>integer ({@link IntegerFeature})</li>
+		 *     <li>float ({@link FloatFeature})</li>
+		 * </ul>
+		 *
+		 * @return the current instance.
+		 *
+		 * @since 0.2
+		 */
 		public Builder disableDefaults() {
 			disableFeature("identifier");
 			disableFeature("character");
@@ -77,6 +172,13 @@ public class FeatureList {
 			return this;
 		}
 
+		/**
+		 * Enables all previously added features.
+		 *
+		 * @return the current instance.
+		 *
+		 * @since 0.2
+		 */
 		public Builder enableAll() {
 			for(var curr: featureList.values()) {
 				curr.setEnabled(true);
@@ -84,6 +186,13 @@ public class FeatureList {
 			return this;
 		}
 
+		/**
+		 * Disables all previously added features without removing them.
+		 *
+		 * @return the current instance.
+		 *
+		 * @since 0.2
+		 */
 		public Builder disableAll() {
 			for(var curr: featureList.values()) {
 				curr.setEnabled(false);
@@ -91,16 +200,48 @@ public class FeatureList {
 			return this;
 		}
 
+		/**
+		 * Convenient method to enable the specified feature. Calling this method is equivalent to {@code setFeatureEnabled(featureName, true}.<br>
+		 * If the specified {@code featureName} is "all" then all features are affected.
+		 *
+		 * @param featureName name of the feature to enable.
+		 * @return the current instance.
+		 *
+		 * @since 0.2
+		 *
+		 * @see Builder#setFeatureEnabled(String, boolean)
+		 */
 		public Builder enableFeature(String featureName) {
 			setFeatureEnabled(featureName, true);
 			return this;
 		}
 
+		/**
+		 * Convenient method to disable the specified feature. Calling this method is equivalent to {@code setFeatureEnabled(featureName, false}.<br>
+		 * If the specified {@code featureName} is "all" then all features are affected.
+		 *
+		 * @param featureName name of the feature to enable.
+		 * @return the current instance.
+		 *
+		 * @since 0.2
+		 *
+		 * @see Builder#setFeatureEnabled(String, boolean)
+		 */
 		public Builder disableFeature(String featureName) {
 			setFeatureEnabled(featureName, false);
 			return this;
 		}
 
+		/**
+		 * Turns on or off the specified feature. Turning it off does not remove it.<br>
+		 * If the specified {@code featureName} is "all" then all features are affected.
+		 *
+		 * @param featureName name of the target feature.
+		 * @param value whether to enable this feature.
+		 * @return the current instance.
+		 *
+		 * @since 0.2
+		 */
 		public Builder setFeatureEnabled(String featureName, boolean value) {
 			if(featureName.equalsIgnoreCase("all")) {
 				if(value)
@@ -125,6 +266,13 @@ public class FeatureList {
 			return this;
 		}
 
+		/**
+		 * Create an instance of {@code FeatureList} from this builder.
+		 *
+		 * @return the created instance.
+		 *
+		 * @since 0.2
+		 */
 		public FeatureList build() {
 			List<Feature> enabled = new ArrayList<>();
 

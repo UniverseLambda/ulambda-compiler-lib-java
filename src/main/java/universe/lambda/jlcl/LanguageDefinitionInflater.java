@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -27,7 +27,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class LanguageDefinitionInflater {
+/**
+ * The {@code LanguageDefinitionInflater} is a class allowing users of this library to create a LanguageDefinition
+ * from a file.
+ * @since 0.2
+ * @see LanguageDefinition
+ */
+public final class LanguageDefinitionInflater {
     /**
      * {@code LanguageDefinition} used by the {@code LanguageDefinitionInflater}
      * to inflate files.

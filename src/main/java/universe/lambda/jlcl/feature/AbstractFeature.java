@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -19,14 +19,46 @@
 
 package universe.lambda.jlcl.feature;
 
+import universe.lambda.jlcl.LanguageDefinition;
+import universe.lambda.jlcl.LanguageDefinitionInflater;
+
 import java.util.HashMap;
 
+/**
+ * This class provides a skeletal implementation of the {@link Feature} interface to minimize effort required to
+ * implement this interface.
+ *
+ * @since 0.2
+ */
 public abstract class AbstractFeature implements Feature {
+	/**
+	 * Name of the feature. Used by {@link LanguageDefinition} and {@link LanguageDefinitionInflater} to index features.
+	 *
+	 * @since 0.2
+	 */
 	private final String name;
+
+	/**
+	 * Flag indicating if the feature is enabled.
+	 *
+	 * @since 0.2
+	 */
 	private boolean enabled;
 
+	/**
+	 * HashMap used to store the data of the feature.
+	 *
+	 * @since 0.2
+	 */
 	private HashMap<String, String> data = new HashMap<>();
 
+	/**
+	 * Construct a feature with the given name.
+	 *
+	 * @param name name of the feature.
+	 *
+	 * @since 0.2
+	 */
 	public AbstractFeature(String name) {
 		this.name = name;
 		this.enabled = false;

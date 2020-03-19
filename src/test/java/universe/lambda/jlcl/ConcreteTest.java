@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -33,7 +33,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ConcreteTest {
     @Test
     void inflaterTest() {
-        Logger.name = "Inflater test";
+        Logger.name = "Inflater";
+        Logger.minimumLogLevel = Logger.LogLevel.DEBUG;
+
         Path conf = Paths.get("samples/inflater-file-sample.ulcl");
         assertTrue(Files.isRegularFile(conf));
 

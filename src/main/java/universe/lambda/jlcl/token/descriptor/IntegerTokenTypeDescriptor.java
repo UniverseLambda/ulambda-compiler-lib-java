@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -21,7 +21,21 @@ package universe.lambda.jlcl.token.descriptor;
 
 import universe.lambda.jlcl.utils.NumberUtil;
 
+/**
+ * Descriptor recognizing integers.
+ *
+ * @since 0.1
+ *
+ * @see universe.lambda.jlcl.token.Token
+ * @see universe.lambda.jlcl.LanguageDefinition
+ * @see universe.lambda.jlcl.feature.IntegerFeature
+ * @see universe.lambda.jlcl.utils.NumberUtil
+ *
+ */
 public class IntegerTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
+	/**
+	 * Default constructor.
+	 */
 	public IntegerTokenTypeDescriptor() {
 		super("INTEGER");
 	}

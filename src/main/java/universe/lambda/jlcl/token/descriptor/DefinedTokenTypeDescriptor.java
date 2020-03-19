@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -19,14 +19,44 @@
 
 package universe.lambda.jlcl.token.descriptor;
 
+/**
+ * Descriptor recognizing the given {@link String}. Its name is defined in the constructor. This is the one used by the
+ * {@link universe.lambda.jlcl.LanguageDefinitionInflater} for lines starting with "TOKEN".
+ *
+ * @since 0.1
+ *
+ * @see universe.lambda.jlcl.token.Token
+ * @see universe.lambda.jlcl.LanguageDefinition
+ */
 public class DefinedTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
+
+	/**
+	 * Value used to match inputs.
+	 *
+	 * @since 0.1
+	 */
 	private final String value;
 
+	/**
+	 * Construct a {@link TokenTypeDescriptor} with the specified name and value.
+	 *
+	 * @param name name of this descriptor.
+	 * @param value value of this descriptor.
+	 *
+	 * @since 0.1
+	 */
 	public DefinedTokenTypeDescriptor(String name, String value) {
 		super(name);
 		this.value = value;
 	}
 
+	/**
+	 * Get this instance value.
+	 *
+	 * @return this instance value.
+	 *
+	 * @since 0.1
+	 */
 	public String getValue() {
 		return value;
 	}

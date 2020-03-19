@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -23,40 +23,54 @@ import universe.lambda.jlcl.token.descriptor.TokenTypeDescriptor;
 
 /**
  * Immutable object representing a token.
+ *
+ * @since 0.1
  */
 public class Token {
 	/**
 	 * Descriptor which created this {@code Token}.
+	 *
+	 * @since 0.1
 	 */
 	private final TokenTypeDescriptor descriptor;
 
 	/**
 	 * Value of this {@code Token}.
+	 *
+	 * @since 0.1
 	 */
 	private final String value;
 
 	/**
 	 * Source of this {@code Token} (often the filename).
+	 *
+	 * @since 0.1
 	 */
 	private final String source;
 
 	/**
 	 * Line of the first character of this {@code Token}.
+	 *
+	 * @since 0.1
 	 */
 	private final int line;
 
 	/**
 	 * Column of the first character of this {@code Token}.
+	 *
+	 * @since 0.1
 	 */
 	private final int col;
 
 	/**
 	 * Create an immutable Token.
-	 * @param descriptor corresponding {@code TokenTypeDescriptor}.
+	 * @param descriptor corresponding {@link TokenTypeDescriptor}.
 	 * @param value of the {@code Token}.
 	 * @param source from which it has been read.
 	 * @param line of the first code point of this {@code Token}.
 	 * @param col of the first code point of this {@code Token}.
+	 *
+	 * @since 0.1
 	 */
 	public Token(TokenTypeDescriptor descriptor, String value, String source, int line, int col) {
 		this.descriptor = descriptor;
@@ -67,40 +81,55 @@ public class Token {
 	}
 
 	/**
-	 * Get corresponding {@code TokenTypeDescriptor}.
+	 * Get the corresponding {@link TokenTypeDescriptor}.
+	 *
 	 * @return the corresponding {@code TokenTypeDescriptor}.
+	 *
+	 * @since 0.1
 	 */
 	public TokenTypeDescriptor getDescriptor() {
 		return descriptor;
 	}
 
 	/**
-	 * Get value of this {@code Token}.
-	 * @return the value motherfucker.
+	 * Get the String value of this {@code Token}.
+	 *
+	 * @return the value.
+	 *
+	 * @since 0.1
 	 */
 	public String getValue() {
 		return value;
 	}
 
 	/**
-	 * Get the name of the source from which this {@code Token} has been read.
+	 * Get the name of the source from which this {@code Token} has been reads.
+	 *
 	 * @return the name of the source.
+	 *
+	 * @since 0.1
 	 */
 	public String getSource() {
 		return source;
 	}
 
 	/**
-	 * Get the line of the beginning of this {@code Token}.
+	 * Get the line of the first char of this {@code Token}.
+	 *
 	 * @return the line of this {@code Token}.
+	 *
+	 * @since 0.1
 	 */
 	public int getLine() {
 		return line;
 	}
 
 	/**
-	 * Get the column of the beginning of this {@code Token}.
+	 * Get the column of the first character of this {@code Token}.
+	 *
 	 * @return the column of this {@code Token}.
+	 *
+	 * @since 0.1
 	 */
 	public int getColumn() {
 		return col;
