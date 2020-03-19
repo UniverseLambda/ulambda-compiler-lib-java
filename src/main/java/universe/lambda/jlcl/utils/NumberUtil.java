@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -26,17 +26,20 @@ package universe.lambda.jlcl.utils;
  */
 public final class NumberUtil {
 	/**
-	 * {@link String} containing all valid characters for constituting a number
+	 * {@link String} containing all valid characters for constituting a number.
 	 *
 	 * @since 0.1
 	 */
 	private static final String numberChars =
 			".0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
 
+	/**
+	 * Static-access-only class, so no instance :)
+	 */
 	private NumberUtil() {}
 
 	/**
-	 * Check whether the input value is an integer.
+	 * Checks whether or not the input value is an integer.
 	 *
 	 * @param value value to test.
 	 * @return {@code true} if the value is an integer, {@code false} otherwise.
@@ -52,9 +55,10 @@ public final class NumberUtil {
 	}
 
 	/**
-	 * Check whether the input value is a float.
+	 * Checks whether or not the input value is a float.
 	 *
 	 * @param value value to test.
+	 * @param suffixes recognized suffixes.
 	 * @return {@code true} if the value is a float, {@code false} otherwise.
 	 *
 	 * @since 0.1
@@ -89,7 +93,7 @@ public final class NumberUtil {
 	}
 
 	/**
-	 * Check whether the input {@link String} only contains code-points specified in the input array.
+	 * Checks whether or not {@code value} only contains code-points from {@code cps}.
 	 *
 	 * @param value value to test.
 	 * @param cps authorized code-points.
@@ -115,7 +119,7 @@ public final class NumberUtil {
 	}
 
 	/**
-	 * Get the 'number prefix' of the specified {@code value}.
+	 * Gets the 'number prefix' of the specified {@code value}.
 	 *
 	 * @param value value to get the prefix from.
 	 * @return the prefix in {@code value} if any.
@@ -135,7 +139,7 @@ public final class NumberUtil {
 	}
 
 	/**
-	 * Get the code points for a float with the specified prefix.
+	 * Gets the code points for a float with the specified prefix.
 	 *
 	 * @param prefix prefix of the float.
 	 * @return authorized code-points for a float.
@@ -147,7 +151,7 @@ public final class NumberUtil {
 	}
 
 	/**
-	 * Get authorized code-points for an integer with the specified prefix.
+	 * Gets authorized code-points for an integer with the specified prefix.
 	 *
 	 * @param prefix prefix of the integer.
 	 * @return authorized code-points for an integer.
@@ -159,7 +163,7 @@ public final class NumberUtil {
 	}
 
 	/**
-	 * Get authorized code-points for a number with the specified prefix.
+	 * Gets authorized code-points for a number with the specified prefix.
 	 *
 	 * @param prefix prefix of the number.
 	 * @param isFloat flag indicating whether it needs to add float-specifics code points.
@@ -173,7 +177,7 @@ public final class NumberUtil {
 	}
 
 	/**
-	 * Get authorized code-points for a number of the specified base.
+	 * Gets authorized code-points for a number of the specified base.
 	 *
 	 * @param base base of the number.
 	 * @param isFloat flag indicating whether it needs to add float-specifics code points.
@@ -186,7 +190,7 @@ public final class NumberUtil {
 	}
 
 	/**
-	 * Get the base for the given number prefix.
+	 * Gets the base for the given number prefix.
 	 *
 	 * @param prefix prefix of the number.
 	 * @return base of the prefix.
@@ -207,7 +211,7 @@ public final class NumberUtil {
 	}
 
 	/**
-	 * Get a {@link String} containing all authorized code-points for the given base.
+	 * Gets a {@link String} containing all authorized code-points for the given base.
 	 *
 	 * @param base base of the number.
 	 * @param isFloat flag indicating whether it needs to add float-specifics code-points.
@@ -222,7 +226,7 @@ public final class NumberUtil {
 	}
 
 	/**
-	 * Get the occurrence count of the given code-point in the given {@link String}.
+	 * Gets the occurrence count of the given code-point in the given {@link String}.
 	 *
 	 * @param target {@code String} to count from.
 	 * @param cp code-point to count occurrence of.

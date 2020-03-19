@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -52,7 +52,7 @@ public class FeatureList {
 	}
 
 	/**
-	 * Apply all enabled features of this list to the specified {@code LanguageDefinition} builder.
+	 * Applies all enabled {@link Feature}s of this list to the specified {@link LanguageDefinition} builder.
 	 *
 	 * @param builder builder to apply this list to.
 	 *
@@ -66,9 +66,9 @@ public class FeatureList {
 	}
 
 	/**
-	 * Builder of {@code FeatureList}. It is the only way to obtain an instance of {@code FeatureList}.<br><br>
+	 * Class used to build a {@code FeatureList} instance. It is the only way to obtain an instance of {@code FeatureList}.<br><br>
 	 *
-	 * By default, it enables some common internal features:
+	 * It enables some common {@link Feature}s by default:
 	 * <ul>
 	 *     <li>identifier ({@link IdentifierFeature})</li>
 	 *     <li>character ({@link CharacterFeature})</li>
@@ -77,8 +77,8 @@ public class FeatureList {
 	 *     <li>float ({@link FloatFeature})</li>
 	 * </ul>
 	 *
-	 * If a feature needs to be enable, it must be first added to this Builder before being enabled.
-	 * Because of this, features can be present in this Builder while being disable.
+	 * If a {@code Feature} needs to be enable, it must be first added to this {@code Builder} before being enabled.
+	 * Because of this, {@code Feature}s can be present in this {@code Builder} while being disable.
 	 *
 	 * @since 0.2
 	 */
@@ -91,7 +91,7 @@ public class FeatureList {
 		private HashMap<String, Feature> featureList = new HashMap<>();
 
 		/**
-		 * Default constructor. It enables all defaults features.
+		 * Default constructor. Enables all defaults features.
 		 *
 		 * @since 0.2
 		 *
@@ -116,7 +116,7 @@ public class FeatureList {
 		}
 
 		/**
-		 * Add a feature to this list.
+		 * Adds a feature to this list.
 		 *
 		 * @param feature feature to add to this list.
 		 *
@@ -127,7 +127,7 @@ public class FeatureList {
 		}
 
 		/**
-		 * Enable defaults features. The default features are:
+		 * Enables defaults features. The default features are:
 		 * <ul>
 		 *     <li>identifier ({@link IdentifierFeature})</li>
 		 *     <li>character ({@link CharacterFeature})</li>
@@ -150,7 +150,7 @@ public class FeatureList {
 		}
 
 		/**
-		 * Disable defaults features. The default features are:
+		 * Disables defaults features. The default features are:
 		 * <ul>
 		 *     <li>identifier ({@link IdentifierFeature})</li>
 		 *     <li>character ({@link CharacterFeature})</li>
@@ -187,7 +187,7 @@ public class FeatureList {
 		}
 
 		/**
-		 * Disables all previously added features without removing them.
+		 * Disables all previously added {@link Feature}s without removing them.
 		 *
 		 * @return the current instance.
 		 *
@@ -201,10 +201,10 @@ public class FeatureList {
 		}
 
 		/**
-		 * Convenient method to enable the specified feature. Calling this method is equivalent to {@code setFeatureEnabled(featureName, true}.<br>
-		 * If the specified {@code featureName} is "all" then all features are affected.
+		 * Convenience method to enable the specified {@link Feature}. Calling this method is equivalent to {@code setFeatureEnabled(featureName, true}.<br>
+		 * If the specified {@code featureName} is "all" then all {@code Feature}s are affected.
 		 *
-		 * @param featureName name of the feature to enable.
+		 * @param featureName name of the {@code Feature} to enable.
 		 * @return the current instance.
 		 *
 		 * @since 0.2
@@ -217,10 +217,10 @@ public class FeatureList {
 		}
 
 		/**
-		 * Convenient method to disable the specified feature. Calling this method is equivalent to {@code setFeatureEnabled(featureName, false}.<br>
-		 * If the specified {@code featureName} is "all" then all features are affected.
+		 * Convenience method to disable the specified {@link Feature}. Calling this method is equivalent to {@code setFeatureEnabled(featureName, false}.<br>
+		 * If the specified {@code featureName} is "all" then all {øcode Feature}s are affected.
 		 *
-		 * @param featureName name of the feature to enable.
+		 * @param featureName name of the {@code Feature} to enable.
 		 * @return the current instance.
 		 *
 		 * @since 0.2
@@ -233,12 +233,17 @@ public class FeatureList {
 		}
 
 		/**
-		 * Turns on or off the specified feature. Turning it off does not remove it.<br>
-		 * If the specified {@code featureName} is "all" then all features are affected.
+		 * Turns on or off the specified {@link Feature}. Turning it off does not remove it.<br>
+		 * If the specified {@code featureName} is "all" then all features are affected, and if it is "defaults" or
+		 * "default", then defaults {@code Feature}s are affected.<br>
+		 * To use this method, the targeted {@code Feature} must have been added to this list.
 		 *
 		 * @param featureName name of the target feature.
 		 * @param value whether to enable this feature.
 		 * @return the current instance.
+		 *
+		 * @throws IllegalArgumentException if the feature represented by {@code featureName} has not been added to this
+		 * list.
 		 *
 		 * @since 0.2
 		 */
@@ -267,9 +272,9 @@ public class FeatureList {
 		}
 
 		/**
-		 * Create an instance of {@code FeatureList} from this builder.
+		 * Creates an instance of {@code FeatureList} from the current {@code Builder}.
 		 *
-		 * @return the created instance.
+		 * @return the instance.
 		 *
 		 * @since 0.2
 		 */

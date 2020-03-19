@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -30,7 +30,17 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class containing tests with more concrete situations.
+ *
+ * @since 0.2
+ */
 public class ConcreteTest {
+    /**
+     * Tests the inflater.
+     *
+     * @since 0.2
+     */
     @Test
     void inflaterTest() {
         Logger.name = "Inflater";

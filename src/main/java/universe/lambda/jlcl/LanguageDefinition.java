@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -68,21 +68,21 @@ public class LanguageDefinition {
 	public static final String IDENTIFIER = "IDENTIFIER";
 
 	/**
-	 * HashMap containing all the descriptors, indexed by their names.
+	 * HashMap containing all the descriptors, indexed by name.
 	 *
 	 * @since 0.1
 	 */
 	private HashMap<String, TokenTypeDescriptor> descriptors;
 
 	/**
-	 * We don't want people to initialize it like sane people do.
+	 * We don't want people to instantiate it like sane people do.
 	 *
 	 * @since 0.1
 	 */
 	private LanguageDefinition() {}
 
 	/**
-	 * Check if a {@code String} correspond to a TokenDescriptor registered in this LanguageDefinition.
+	 * Checks if a {@code String} correspond to a TokenDescriptor registered in this LanguageDefinition.
 	 *
 	 * @param str {@code String} to check from.
 	 * @return {@code true} if a TokenDescriptor was found, {@code false} otherwise.
@@ -99,7 +99,7 @@ public class LanguageDefinition {
 	}
 
 	/**
-	 * Check if a {@link String} MAY correspond to a {@link TokenTypeDescriptor} registered in this {@code LanguageDefinition}.
+	 * Checks if a {@link String} MAY correspond to a {@link TokenTypeDescriptor} registered in this {@code LanguageDefinition}.
 	 * This method differs from {@link #correspondToken(String)} in the fact that the value may not be an actual valid token, but
 	 * adding more characters may be a valid token.
 	 *
@@ -118,7 +118,7 @@ public class LanguageDefinition {
 	}
 
 	/**
-	 * Get the first {@link TokenTypeDescriptor} which value corresponds to {@code value}, if one.
+	 * Gets the first {@link TokenTypeDescriptor} which value corresponds to {@code value}, if one.
 	 *
 	 * @param value value of the {@code TokenTypeDescriptor}.
 	 * @return the {@code TokenTypeDescriptor} if found, null otherwise.
@@ -140,7 +140,7 @@ public class LanguageDefinition {
 	}
 
 	/**
-	 * Get the first {@link TokenTypeDescriptor} which name corresponds to {@code value}, if one.
+	 * Gets the first {@link TokenTypeDescriptor} which name corresponds to {@code value}, if one.
 	 *
 	 * @param name name of the {@code TokenTypeDescriptor}.
 	 * @return the {@code TokenTypeDescriptor} if found, null otherwise.
@@ -172,7 +172,7 @@ public class LanguageDefinition {
 		private HashMap<String, TokenTypeDescriptor> desc = new HashMap<>();
 
 		/**
-		 * Default constructor. Use the default {@link FeatureList}.
+		 * Creates a new {@code Builder}. Use the default {@link FeatureList}.
 		 *
 		 * @since 0.1
 		 */
@@ -181,11 +181,11 @@ public class LanguageDefinition {
 		}
 
 		/**
-		 * Add a {@code DefinedTokenTypeDescriptor} with specified parameters.
+		 * Adds a {@code DefinedTokenTypeDescriptor} with specified parameters.
 		 *
 		 * @param name name of the {@link DefinedTokenTypeDescriptor}.
 		 * @param value value of the {@code DefinedTokenTypeDescriptor}.
-		 * @return this builder, for inline calls.
+		 * @return the current instance.
 		 *
 		 * @since 0.1
 		 */
@@ -194,10 +194,10 @@ public class LanguageDefinition {
 		}
 
 		/**
-		 * Add a {@code TokenTypeDescriptor} to the LanguageDefinition.
+		 * Adds a {@code TokenTypeDescriptor} to the LanguageDefinition.
 		 *
 		 * @param descriptor to add.
-		 * @return this builder, for inline calls.
+		 * @return the current instance.
 		 *
 		 * @since 0.1
 		 */
@@ -207,7 +207,7 @@ public class LanguageDefinition {
 		}
 
 		/**
-		 * Set the {@link FeatureList} to use when building the {@link LanguageDefinition}.
+		 * Sets the {@link FeatureList} to use when building the {@link LanguageDefinition}.
 		 *
 		 * @param featureList The new {@code FeatureList} to use.
 		 * @return the current instance.
@@ -220,7 +220,7 @@ public class LanguageDefinition {
 		}
 
 		/**
-		 * Build the LanguageDefinition.
+		 * Builds a {@link LanguageDefinition} from this {@code Builder}.
 		 *
 		 * @return the built LanguageDefinition.
 		 *

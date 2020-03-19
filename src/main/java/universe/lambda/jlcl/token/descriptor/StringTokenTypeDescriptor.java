@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -19,24 +19,27 @@
 
 package universe.lambda.jlcl.token.descriptor;
 
+import universe.lambda.jlcl.LanguageDefinition;
+
 /**
  * Descriptor recognizing strings. Strings start and end with ' " '. A character can be escaped by preceding it with '\'.
  * It will be written as is with the escaping character.
  *
  * @since 0.1
  *
- * @see universe.lambda.jlcl.token.Token
- * @see universe.lambda.jlcl.LanguageDefinition
  * @see universe.lambda.jlcl.feature.StringFeature
+ * @see TokenTypeDescriptor
+ * @see universe.lambda.jlcl.token.Token
+ * @see LanguageDefinition
  */
 public class StringTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
 	/**
-	 * Default constructor.
+	 * Creates a new {@code StringTokenTypeDescriptor}.
 	 *
 	 * @since 0.1
 	 */
 	public StringTokenTypeDescriptor() {
-		super("STRING");
+		super(LanguageDefinition.STRING);
 	}
 
 	@Override
@@ -51,7 +54,7 @@ public class StringTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
 	}
 
 	/**
-	 * Analyse the input value to determine if is a valid String. The method goes through each code-points of
+	 * Analyses {@code value} to determine if it is a valid string. The method goes through each code-points of
 	 * {@code value}, stopping at the first unescaped ' " ' character returning {@code true} if it stopped at the end
 	 * of {@code value}, {@code false} otherwise. If the method reaches the end of {@code value} without encountering an
 	 * unescaped ' " ', then the method returns {@code defaultReturn}.

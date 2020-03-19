@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -24,6 +24,10 @@ import universe.lambda.jlcl.token.descriptor.StringTokenTypeDescriptor;
 
 /**
  * Feature adding the default string TokenTypeDescriptor ({@link StringTokenTypeDescriptor}) to the {@link LanguageDefinition}.
+ *
+ * @see StringTokenTypeDescriptor
+ * @see Feature
+ * @see LanguageDefinition
  *
  * @since 0.2
  */

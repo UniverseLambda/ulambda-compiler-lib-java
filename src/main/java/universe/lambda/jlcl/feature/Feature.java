@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -24,11 +24,11 @@ import universe.lambda.jlcl.LanguageDefinition;
 /**
  * A feature of this library.<br><br>
  *
- * Features are a set of parameters applied to a {@link LanguageDefinition.Builder} when it's {@link LanguageDefinition.Builder#build()} method is
+ * Features are a set of parameters applied to a {@link LanguageDefinition.Builder} when its {@link LanguageDefinition.Builder#build()} method is
  * called. Features are stored inside a {@link FeatureList}.<br><br>
  *
- * Features can have data of the form of key-value pairs of String. This data is set and get by {@link #setData} and
- * {@link Feature#getData} methods respectively.
+ * Features can have data of the form of key-value pairs of {@code String}. This data can be set and get by {@link #setData} and
+ * {@link #getData} methods respectively.
  *
  * @since 0.2
  *
@@ -36,25 +36,25 @@ import universe.lambda.jlcl.LanguageDefinition;
  */
 public interface Feature {
 	/**
-	 * Returns the boolean indicating whether this {@code Feature} is enabled or not.
+	 * Returns the name of this {@code Feature}.
 	 *
-	 * @return the boolean value.
+	 * @return the name.
 	 *
 	 * @since 0.2
 	 */
 	String getName();
 
 	/**
-	 * Turns on or off this feature.
+	 * Turns on or off this {@code Feature}.
 	 *
-	 * @param enabled whether to enable this feature.
+	 * @param enabled whether or not to enable this {@code Feature}.
 	 *
 	 * @since 0.2
 	 */
 	void setEnabled(boolean enabled);
 
 	/**
-	 * Get whether this feature is enabled or not.
+	 * Returns whether or not this {@code Feature} is enabled.
 	 *
 	 * @return {@code true} if this feature is enabled, {@code false} otherwise.
 	 *
@@ -63,7 +63,7 @@ public interface Feature {
 	boolean isEnabled();
 
 	/**
-	 * Set the specified data to the specified value.
+	 * Sets the specified data to the specified value.
 	 *
 	 * @param key key of data to set.
 	 * @param value value to set to the data.
@@ -73,7 +73,7 @@ public interface Feature {
 	void setData(String key, String value);
 
 	/**
-	 * Get the value of the specified data, defaulting it to {@code null} if not found.
+	 * Gets the value of the specified data, returning {@code null} if {@code key} does not exists.
 	 *
 	 * @param key key of the data.
 	 * @return the value of the data, {@code null} if not found.
@@ -85,10 +85,10 @@ public interface Feature {
 	}
 
 	/**
-	 * Get the value of the specified data, defaulting to {@code defaultValue} if not found.
+	 * Gets the value of the specified data, returning {@code defaultValue} if {@code key} does not exists.
 	 *
 	 * @param key key of the data.
-	 * @param defaultValue default value to return if the data is not found.
+	 * @param defaultValue default value to return if the data does not exist.
 	 * @return the value of the {@code key} data, {@code defaultValue} if not found.
 	 *
 	 * @since 0.2
@@ -96,9 +96,9 @@ public interface Feature {
 	String getData(String key, String defaultValue);
 
 	/**
-	 * Apply this feature parameters to the specified {@link LanguageDefinition} builder.
+	 * Applies this {@code Feature} parameters to the specified {@link LanguageDefinition} builder.
 	 *
-	 * @param builder to apply to this feature parameter.
+	 * @param builder builder to apply this {@code Feature} to.
 	 *
 	 * @since 0.2
 	 */

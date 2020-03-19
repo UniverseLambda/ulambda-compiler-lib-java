@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -26,11 +26,15 @@ import universe.lambda.jlcl.token.descriptor.FloatTokenTypeDescriptor;
  * Feature adding the default float TokenTypeDescriptor ({@link FloatTokenTypeDescriptor}) to the {@link LanguageDefinition}.
  *
  * @since 0.2
+ *
+ * @see FloatTokenTypeDescriptor
+ * @see Feature
+ * @see LanguageDefinition
  */
 public class FloatFeature extends AbstractFeature {
 
 	/**
-	 * Default constructor.
+	 * Creates a new {@code FloatFeature}.
 	 *
 	 * @since 0.2
 	 */

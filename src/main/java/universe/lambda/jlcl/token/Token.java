@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -63,7 +63,8 @@ public class Token {
 	private final int col;
 
 	/**
-	 * Create an immutable Token.
+	 * Creates a new {@code Token}.
+	 *
 	 * @param descriptor corresponding {@link TokenTypeDescriptor}.
 	 * @param value of the {@code Token}.
 	 * @param source from which it has been read.
@@ -81,7 +82,7 @@ public class Token {
 	}
 
 	/**
-	 * Get the corresponding {@link TokenTypeDescriptor}.
+	 * Gets the corresponding {@link TokenTypeDescriptor}.
 	 *
 	 * @return the corresponding {@code TokenTypeDescriptor}.
 	 *
@@ -92,7 +93,7 @@ public class Token {
 	}
 
 	/**
-	 * Get the String value of this {@code Token}.
+	 * Gets the String value of this {@code Token}.
 	 *
 	 * @return the value.
 	 *
@@ -103,7 +104,7 @@ public class Token {
 	}
 
 	/**
-	 * Get the name of the source from which this {@code Token} has been reads.
+	 * Gets the name of the source from which this {@code Token} has been reads.
 	 *
 	 * @return the name of the source.
 	 *
@@ -114,7 +115,7 @@ public class Token {
 	}
 
 	/**
-	 * Get the line of the first char of this {@code Token}.
+	 * Gets the line of the first char of this {@code Token}.
 	 *
 	 * @return the line of this {@code Token}.
 	 *
@@ -125,7 +126,7 @@ public class Token {
 	}
 
 	/**
-	 * Get the column of the first character of this {@code Token}.
+	 * Gets the column of the first character of this {@code Token}.
 	 *
 	 * @return the column of this {@code Token}.
 	 *

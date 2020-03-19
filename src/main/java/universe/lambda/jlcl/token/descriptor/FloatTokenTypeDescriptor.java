@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -19,6 +19,7 @@
 
 package universe.lambda.jlcl.token.descriptor;
 
+import universe.lambda.jlcl.LanguageDefinition;
 import universe.lambda.jlcl.utils.NumberUtil;
 
 /**
@@ -26,9 +27,10 @@ import universe.lambda.jlcl.utils.NumberUtil;
  *
  * @since 0.1
  *
+ * @see universe.lambda.jlcl.feature.FloatFeature
+ * @see TokenTypeDescriptor
  * @see universe.lambda.jlcl.token.Token
  * @see universe.lambda.jlcl.LanguageDefinition
- * @see universe.lambda.jlcl.feature.FloatFeature
  * @see universe.lambda.jlcl.utils.NumberUtil
  */
 public class FloatTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
@@ -40,7 +42,7 @@ public class FloatTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
 	private String[] floatSuffix;
 
 	/**
-	 * Default constructor defaulting suffixes to "F", "f", "D" and "d".
+	 * Creates a new {@code FloatTokenTypeDescriptor} defaulting suffixes to "F", "f", "D" and "d".
 	 *
 	 * @since 0.1
 	 */
@@ -49,14 +51,14 @@ public class FloatTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
 	}
 
 	/**
-	 * Construct a {@link TokenTypeDescriptor} recognizing floats with and without the specified suffixes.
+	 * Creates a new {@code FloatTokenTypeDescriptor} recognizing floats with and without the specified suffixes.
 	 *
 	 * @param suffixes recognized suffixes.
 	 *
 	 * @since 0.1
 	 */
 	public FloatTokenTypeDescriptor(String[] suffixes) {
-		super("FLOAT");
+		super(LanguageDefinition.FLOAT);
 		this.floatSuffix = (suffixes == null ? new String[0] : suffixes);
 	}
 

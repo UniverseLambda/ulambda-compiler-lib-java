@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -38,7 +38,7 @@ public class DefinedTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
 	private final String value;
 
 	/**
-	 * Construct a {@link TokenTypeDescriptor} with the specified name and value.
+	 * Creates a new {@code DefinedTokenTypeDescriptor} with the specified name and value.
 	 *
 	 * @param name name of this descriptor.
 	 * @param value value of this descriptor.
@@ -51,7 +51,7 @@ public class DefinedTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
 	}
 
 	/**
-	 * Get this instance value.
+	 * Gets this instance value.
 	 *
 	 * @return this instance value.
 	 *

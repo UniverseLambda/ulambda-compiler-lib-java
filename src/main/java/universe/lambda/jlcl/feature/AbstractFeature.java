@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -19,9 +19,6 @@
 
 package universe.lambda.jlcl.feature;
 
-import universe.lambda.jlcl.LanguageDefinition;
-import universe.lambda.jlcl.LanguageDefinitionInflater;
-
 import java.util.HashMap;
 
 /**
@@ -32,7 +29,7 @@ import java.util.HashMap;
  */
 public abstract class AbstractFeature implements Feature {
 	/**
-	 * Name of the feature. Used by {@link LanguageDefinition} and {@link LanguageDefinitionInflater} to index features.
+	 * Name of the feature. Used by {@link universe.lambda.jlcl.LanguageDefinition} and {@link universe.lambda.jlcl.LanguageDefinitionInflater} to index features.
 	 *
 	 * @since 0.2
 	 */
@@ -53,7 +50,7 @@ public abstract class AbstractFeature implements Feature {
 	private HashMap<String, String> data = new HashMap<>();
 
 	/**
-	 * Construct a feature with the given name.
+	 * Creates a new feature with the given name.
 	 *
 	 * @param name name of the feature.
 	 *

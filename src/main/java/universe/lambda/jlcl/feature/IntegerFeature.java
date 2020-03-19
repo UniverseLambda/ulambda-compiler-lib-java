@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -25,12 +25,16 @@ import universe.lambda.jlcl.token.descriptor.IntegerTokenTypeDescriptor;
 /**
  * Feature adding the default integer TokenTypeDescriptor ({@link IntegerTokenTypeDescriptor}) to the {@link LanguageDefinition}.
  *
+ * @see IntegerTokenTypeDescriptor
+ * @see Feature
+ * @see LanguageDefinition
+ *
  * @since 0.2
  */
 public class IntegerFeature extends AbstractFeature {
 
 	/**
-	 * Default constructor
+	 * Creates a new {@code IntegerFeature}.
 	 *
 	 * @since 0.2
 	 */

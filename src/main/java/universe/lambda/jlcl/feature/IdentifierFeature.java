@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -26,11 +26,15 @@ import universe.lambda.jlcl.token.descriptor.IdentifierTokenTypeDescriptor;
  * Feature adding the default identifier TokenTypeDescriptor ({@link IdentifierTokenTypeDescriptor}) to the {@link LanguageDefinition}.
  *
  * @since 0.2
+ *
+ * @see IdentifierTokenTypeDescriptor
+ * @see Feature
+ * @see LanguageDefinition
  */
 public class IdentifierFeature extends AbstractFeature {
 
 	/**
-	 * Default constructor
+	 * Creates a new {@code IdentifierFeature}
 	 *
 	 * @since 0.2
 	 */

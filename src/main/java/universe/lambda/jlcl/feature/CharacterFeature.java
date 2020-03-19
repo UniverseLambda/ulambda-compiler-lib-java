@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -27,14 +27,14 @@ import universe.lambda.jlcl.token.descriptor.CharTokenTypeDescriptor;
  *
  * @since 0.2
  *
+ * @see CharTokenTypeDescriptor
  * @see Feature
  * @see LanguageDefinition
- * @see CharTokenTypeDescriptor
  */
 public class CharacterFeature extends AbstractFeature {
 
 	/**
-	 * Default constructor
+	 * Creates a new {@code CharacterFeature}.
 	 *
 	 * @since 0.2
 	 */

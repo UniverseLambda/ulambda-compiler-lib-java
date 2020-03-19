@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -22,67 +22,89 @@ package universe.lambda.jlcl;
 /**
  * {@code Logger} is a helper class for logging. All the library classes which needs logging use this class.
  * The user may choose not to use this class but is advised to, for log uniformity.
+ *
  * @since 0.1
  */
 public final class Logger {
 	/**
-	 * The log level from which this class starts logging
+	 * The log level from which this class starts logging.
+	 *
+	 * @since 0.1
 	 */
 	public static LogLevel minimumLogLevel = LogLevel.INFO;
 
 	/**
-	 * Name used in logs content
+	 * Name used in logs content.
+	 *
+	 * @since 0.1
 	 */
 	public static String name = "";
 
 	/**
 	 * Flag indicating whether {@code Logger.logErr} should redirect logs to standard output instead of
-	 * standard error
+	 * standard error.
+	 *
+	 * @since 0.1
 	 */
 	public static boolean redirectErr = false;
 
 	/**
-	 * Shortcut method. equivalent to {@code Logger.log(LogLevel.DEBUG, message)}
-	 * @param message message to log
+	 * Convenience method equivalent to {@code Logger.log(LogLevel.DEBUG, message)}.
+	 *
+	 * @param message message to log.
+	 *
+	 * @since 0.1
 	 */
 	public static void debug(Object message) {
 		log(LogLevel.DEBUG, message);
 	}
 
 	/**
-	 * Shortcut method equivalent to {@code Logger.log(LogLevel.DEBUG, message)}
+	 * Convenience method equivalent to {@code Logger.log(LogLevel.DEBUG, message)}.
+	 *
 	 * @param message message to log.
+	 *
+	 * @since 0.1
 	 */
 	public static void info(Object message) {
 		log(LogLevel.INFO, message);
 	}
 
 	/**
-	 * Shortcut method equivalent to {@code Logger.log(LogLevel.WARN, message)}
+	 * Convenience method equivalent to {@code Logger.log(LogLevel.WARN, message)}.
+	 *
 	 * @param message message to log.
+	 *
+	 * @since 0.1
 	 */
 	public static void warn(Object message) {
 		log(LogLevel.WARN, message);
 	}
 
 	/**
-	 * Shortcut method equivalent to {@code Logger.logErr(LogLevel.ERROR, message)}
+	 * Convenience method equivalent to {@code Logger.logErr(LogLevel.ERROR, message)}.
+	 *
 	 * @param message message to log.
+	 *
+	 * @since 0.1
 	 */
 	public static void error(Object message) {
 		logErr(LogLevel.ERROR, message);
 	}
 
 	/**
-	 * Shortcut method equivalent to {@code Logger.logErr(LogLevel.FATAL, message)}
+	 * Convenience method equivalent to {@code Logger.logErr(LogLevel.FATAL, message)}.
+	 *
 	 * @param message message to log.
+	 *
+	 * @since 0.1
 	 */
 	public static void fatal(Object message) {
 		logErr(LogLevel.FATAL, message);
 	}
 
 	/**
-	 * Log a message with the specified log level to the standard output.<br>
+	 * Logs a message with the specified log level to the standard output.<br>
 	 *
 	 * Logs have the following syntax:<br><br>
 	 *
@@ -92,6 +114,8 @@ public final class Logger {
 	 *
 	 * @param level level of the message.
 	 * @param message message to log.
+	 *
+	 * @since 0.1
 	 */
 	public static void log(LogLevel level, Object message) {
 		if (level.position < minimumLogLevel.position) {
@@ -101,7 +125,7 @@ public final class Logger {
 	}
 
 	/**
-	 * Log a message with the specified log level to the standard error.<br>
+	 * Logs a message with the specified log level to the standard error.<br>
 	 *
 	 * Logs have the following syntax:<br><br>
 	 *
@@ -111,8 +135,10 @@ public final class Logger {
 	 * Furthermore, if {@code redirectErr} is {@code true}, then the logger uses the standard output instead of the
 	 * standard error.
 	 *
-	 * @param level level of the message
-	 * @param message message to log
+	 * @param level level of the message.
+	 * @param message message to log.
+	 *
+	 * @since 0.1
 	 */
 	public static void logErr(LogLevel level, Object message) {
 		if (redirectErr) {
@@ -127,7 +153,8 @@ public final class Logger {
 	}
 
 	/**
-	 * Represents a log level
+	 * Represents a log level.
+	 *
 	 * @since 0.1
 	 */
 	public enum LogLevel {
@@ -140,11 +167,15 @@ public final class Logger {
 
 		/**
 		 * Integer value of the log level. It is used to position log levels relative to each other.
+		 *
+		 * @since 0.1
 		 */
 		public int position;
 
 		/**
 		 * String value of the log level. It is used in the log content.
+		 *
+		 * @since 0.1
 		 */
 		public String value;
 

@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -42,7 +42,7 @@ public interface TokenTypeDescriptor {
 	String getName();
 
 	/**
-	 * Get whether the input may correspond to this descriptor.
+	 * Gets whether the input may correspond to this descriptor.
 	 *
 	 * @param value value to check.
 	 * @return {@code true} if the input may correspond to this descriptor, {@code false} otherwise.
@@ -52,7 +52,7 @@ public interface TokenTypeDescriptor {
 	boolean mayCorrespond(String value);
 
 	/**
-	 * Get whether the input corresponds to this descriptor.
+	 * Gets whether the input corresponds to this descriptor.
 	 *
 	 * @param value value to check.
 	 * @return {@code true} if the input corresponds to this descriptor, {@code false} otherwise.
@@ -62,7 +62,8 @@ public interface TokenTypeDescriptor {
 	boolean correspond(String value);
 
 	/**
-	 * Make a {@link Token} from the specified arguments.
+	 * Makes a {@link Token} from the specified arguments. Implementations of this method SHOULD check if the {@code value} corresponds to this descriptor and
+	 * return {@code null} if not.
 	 *
 	 * @param value {@link String} value of the {@code Token}.
 	 * @param source name of the source from which {@code value} has been read.
@@ -70,8 +71,7 @@ public interface TokenTypeDescriptor {
 	 * @param column column where {@code value} has been read.
 	 * @return the created {@code Token}.
 	 *
-	 * @implNote implementations of this method SHOULD check if the {@code value} corresponds to this descriptor and
-	 * return {@code null} if not.
+	 * @since 0.1
 	 */
 	Token makeToken(String value, String source, int line, int column);
 }
