@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -19,6 +19,7 @@
 
 module universe.lambda.jlcl {
     exports universe.lambda.jlcl;
+    exports universe.lambda.jlcl.feature;
     exports universe.lambda.jlcl.token;
     exports universe.lambda.jlcl.token.descriptor;
     exports universe.lambda.jlcl.utils;

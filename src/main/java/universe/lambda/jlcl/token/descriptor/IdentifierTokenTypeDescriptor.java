@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -19,9 +19,28 @@
 
 package universe.lambda.jlcl.token.descriptor;
 
+import universe.lambda.jlcl.LanguageDefinition;
+
+/**
+ * Descriptor recognizing identifiers.
+ *
+ * Identifiers can be composed of letters, digits and underscores but must not start with a digit (to avoid
+ * ambiguity with integers).
+ *
+ * @since 0.1
+ *
+ * @see universe.lambda.jlcl.feature.IdentifierFeature
+ * @see TokenTypeDescriptor
+ * @see universe.lambda.jlcl.token.Token
+ * @see LanguageDefinition
+ */
 public class IdentifierTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
-	public IdentifierTokenTypeDescriptor(String name) {
-		super(name);
+
+	/**
+	 * Creates a new {@code IdentifierTokenTypeDescriptor}.
+	 */
+	public IdentifierTokenTypeDescriptor() {
+		super(LanguageDefinition.IDENTIFIER);
 	}
 
 	@Override
@@ -34,6 +53,14 @@ public class IdentifierTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
 		return isIdentifier(value);
 	}
 
+	/**
+	 * Checks if the input value is or may be an identifier.
+	 *
+	 * @param value value to test.
+	 * @return {@code true} if the value is an identifier, {@code false} otherwise.
+	 *
+	 * @since 0.1
+	 */
 	private boolean isIdentifier(String value) {
 		for(int i = 0; i < value.length(); i++) {
 			int cp = value.codePointAt(i);

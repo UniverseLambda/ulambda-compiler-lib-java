@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -21,13 +21,37 @@ package universe.lambda.jlcl.token.descriptor;
 
 import universe.lambda.jlcl.token.Token;
 
+/**
+ * This class provides a skeletal implementation of the {@link TokenTypeDescriptor} interface to minimize effort required to
+ * implement this interface.
+ *
+ * @see universe.lambda.jlcl.token.descriptor.TokenTypeDescriptor
+ * @see Token
+ * @see universe.lambda.jlcl.LanguageDefinition
+ *
+ * @since 0.1
+ */
 public abstract class AbstractTokenTypeDescriptor implements TokenTypeDescriptor {
+
+	/**
+	 * Name of the descriptor. Used by {@link universe.lambda.jlcl.LanguageDefinition} and {@link universe.lambda.jlcl.LanguageDefinitionInflater} to index descriptors.
+	 *
+	 * @since 0.1
+	 */
 	private String name;
 
+	/**
+	 * Creates a new {@code AbstractTokenTypeDescriptor} with the given name.
+	 *
+	 * @param name name of the descriptor.
+	 *
+	 * @since 0.1
+	 */
 	public AbstractTokenTypeDescriptor(String name) {
 		this.name = name;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}

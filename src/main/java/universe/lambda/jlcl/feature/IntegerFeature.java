@@ -15,37 +15,35 @@
 
 	You should have received a copy of the GNU General Public License
 	along with the uLambda Compiler Library.  If not, see <https://www.gnu.org/licenses/>.
- */
+  */
 
-package universe.lambda.jlcl.token.descriptor;
+package universe.lambda.jlcl.feature;
 
 import universe.lambda.jlcl.LanguageDefinition;
+import universe.lambda.jlcl.token.descriptor.IntegerTokenTypeDescriptor;
 
 /**
- * Descriptor recognizing characters.
+ * Feature adding the default integer TokenTypeDescriptor ({@link IntegerTokenTypeDescriptor}) to the {@link LanguageDefinition}.
  *
- * @since 0.1
- *
- * @see universe.lambda.jlcl.feature.CharacterFeature
- * @see TokenTypeDescriptor
- * @see universe.lambda.jlcl.token.Token
+ * @see IntegerTokenTypeDescriptor
+ * @see Feature
  * @see LanguageDefinition
+ *
+ * @since 0.2
  */
-public class CharTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
+public class IntegerFeature extends AbstractFeature {
+
 	/**
-	 * Creates a new {@code CharTokenTypeDescriptor}.
+	 * Creates a new {@code IntegerFeature}.
+	 *
+	 * @since 0.2
 	 */
-	public CharTokenTypeDescriptor() {
-		super(LanguageDefinition.CHAR);
+	public IntegerFeature() {
+		super("integer");
 	}
 
 	@Override
-	public boolean correspond(String value) {
-		return value.startsWith("'") && value.length() == 3 && value.endsWith("'");
-	}
-
-	@Override
-	public boolean mayCorrespond(String value) {
-		return value.startsWith("'") && value.length() < 4;
+	public void apply(LanguageDefinition.Builder builder) {
+		builder.addTokenType(new IntegerTokenTypeDescriptor());
 	}
 }

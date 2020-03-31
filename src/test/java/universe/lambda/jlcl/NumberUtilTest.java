@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -24,7 +24,17 @@ import universe.lambda.jlcl.utils.NumberUtil;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Class containing tests for {@link NumberUtil}.
+ *
+ * @since 0.1
+ */
 public class NumberUtilTest {
+	/**
+	 * Tests the capacity of this library to recognize integers of different formats.
+	 *
+	 * @since 0.1
+	 */
 	@Test
 	void valid_isInteger() {
 		assertTrue(NumberUtil.isInteger("16"), "16");
