@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 

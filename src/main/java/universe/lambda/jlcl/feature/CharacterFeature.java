@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -22,7 +22,22 @@ package universe.lambda.jlcl.feature;
 import universe.lambda.jlcl.LanguageDefinition;
 import universe.lambda.jlcl.token.descriptor.CharTokenTypeDescriptor;
 
+/**
+ * Feature adding the default character TokenTypeDescriptor ({@link CharTokenTypeDescriptor}) to the {@link LanguageDefinition}.
+ *
+ * @since 0.2
+ *
+ * @see CharTokenTypeDescriptor
+ * @see Feature
+ * @see LanguageDefinition
+ */
 public class CharacterFeature extends AbstractFeature {
+
+	/**
+	 * Creates a new {@code CharacterFeature}.
+	 *
+	 * @since 0.2
+	 */
 	public CharacterFeature() {
 		super("character");
 	}

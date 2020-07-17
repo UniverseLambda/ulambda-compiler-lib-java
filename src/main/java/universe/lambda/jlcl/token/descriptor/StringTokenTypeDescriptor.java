@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -19,36 +19,68 @@
 
 package universe.lambda.jlcl.token.descriptor;
 
+import universe.lambda.jlcl.LanguageDefinition;
+
+/**
+ * Descriptor recognizing strings. Strings start and end with ' " '. A character can be escaped by preceding it with '\'.
+ * It will be written as is with the escaping character.
+ *
+ * @since 0.1
+ *
+ * @see universe.lambda.jlcl.feature.StringFeature
+ * @see TokenTypeDescriptor
+ * @see universe.lambda.jlcl.token.Token
+ * @see LanguageDefinition
+ */
 public class StringTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
+	/**
+	 * Creates a new {@code StringTokenTypeDescriptor}.
+	 *
+	 * @since 0.1
+	 */
 	public StringTokenTypeDescriptor() {
-		super("STRING");
+		super(LanguageDefinition.STRING);
 	}
 
 	@Override
 	public boolean correspond(String value) {
-		if(!value.startsWith("\"") || !value.endsWith("\"")) return false;
+		if(!value.endsWith("\"")) return false;
 		return analyse(value, false);
 	}
 
 	@Override
 	public boolean mayCorrespond(String value) {
-		if(!value.startsWith("\"")) return false;
 		return analyse(value, true);
 	}
 
+	/**
+	 * Analyses {@code value} to determine if it is a valid string. The method goes through each code-points of
+	 * {@code value}, stopping at the first unescaped ' " ' character returning {@code true} if it stopped at the end
+	 * of {@code value}, {@code false} otherwise. If the method reaches the end of {@code value} without encountering an
+	 * unescaped ' " ', then the method returns {@code defaultReturn}.
+	 *
+	 * @param value value to analyse.
+	 * @param defaultReturn value to return if the string is incomplete.
+	 * @return {@code true} if {@code value} is a valid string, {@code false} if it is not, {@code defaultReturn} if
+	 * {@code value} seems to be an incomplete string.
+	 *
+	 * @since 0.2
+	 */
 	private static boolean analyse(String value, boolean defaultReturn) {
-		boolean skipPrevious = false;
+		if(!value.startsWith("\"")) return false;
+
+		boolean skipNext = false;
 
 		for(int i = 1; i < value.length(); i++) {
-			if(skipPrevious) {
-				skipPrevious = false;
+			if(skipNext) {
+				skipNext = false;
 				continue;
 			}
 
 			int cp = value.codePointAt(i);
 
 			if(cp == '\\') {
-				skipPrevious = true;
+				skipNext = true;
 				continue;
 			}
 

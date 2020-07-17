@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -27,17 +27,32 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class LanguageDefinitionInflater {
+/**
+ * The {@code LanguageDefinitionInflater} is a class allowing users of this library to create a LanguageDefinition
+ * from a file.
+ *
+ * @since 0.2
+ *
+ * @see LanguageDefinition
+ */
+public final class LanguageDefinitionInflater {
     /**
-     * {@code LanguageDefinition} used by the {@code LanguageDefinitionInflater}
-     * to inflate files.
+     * {@link LanguageDefinition} used by the {@code LanguageDefinitionInflater} to inflate files.<br><br>
+     *
+     * <strong>RECYCLING INTENSIFIES</strong>
+     *
+     * @since 0.2
     */
     private static LanguageDefinition inflaterDef;
 
     /**
-     * @param path Path to the file to inflate
+     * Inflates a {@link LanguageDefinition} from the file represented.
+     *
+     * @param path Path to the file to inflate.
      * @return the inflated {@code LanguageDefinition} if the process has been
      * successful, {@code null} otherwise.
+     *
+     * @since 0.2
     */
     public static LanguageDefinition inflate(Path path) {
         Logger.debug("inflating LanguageDefinition...");
@@ -146,7 +161,9 @@ public class LanguageDefinitionInflater {
     }
 
     /**
-     * Initialize the inflater {@code LanguageDefinition}.
+     * Initialize the inflater's instance of {@link LanguageDefinition}.
+     *
+     * @since 0.2
     */
     private static void init() {
         if(inflaterDef != null) return;

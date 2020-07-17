@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -19,18 +19,33 @@
 
 package universe.lambda.jlcl.token.descriptor;
 
+import universe.lambda.jlcl.LanguageDefinition;
+
+/**
+ * Descriptor recognizing characters.
+ *
+ * @since 0.1
+ *
+ * @see universe.lambda.jlcl.feature.CharacterFeature
+ * @see TokenTypeDescriptor
+ * @see universe.lambda.jlcl.token.Token
+ * @see LanguageDefinition
+ */
 public class CharTokenTypeDescriptor extends AbstractTokenTypeDescriptor {
+	/**
+	 * Creates a new {@code CharTokenTypeDescriptor}.
+	 */
 	public CharTokenTypeDescriptor() {
-		super("CHAR");
+		super(LanguageDefinition.CHAR);
 	}
 
 	@Override
 	public boolean correspond(String value) {
-		return value.startsWith("\'") && value.length() == 3 && value.endsWith("\'");
+		return value.startsWith("'") && value.length() == 3 && value.endsWith("'");
 	}
 
 	@Override
 	public boolean mayCorrespond(String value) {
-		return value.startsWith("\'") && value.length() < 4;
+		return value.startsWith("'") && value.length() < 4;
 	}
 }

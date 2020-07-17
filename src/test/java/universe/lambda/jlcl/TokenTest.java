@@ -1,5 +1,5 @@
 /*
-	Copyright 2019 Clément Saad
+	Copyright 2019, 2020 Clément Saad
 
 	This file is part of the uLambda Compiler Library.
 
@@ -26,6 +26,11 @@ import universe.lambda.jlcl.token.descriptor.IntegerTokenTypeDescriptor;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Class containing tests for {@link universe.lambda.jlcl.token.descriptor.TokenTypeDescriptor}.
+ *
+ * @since 0.1
+ */
 class TokenTest {
 	private final FloatTokenTypeDescriptor floatTTD = new FloatTokenTypeDescriptor();
 	private final IntegerTokenTypeDescriptor intTTD = new IntegerTokenTypeDescriptor();
@@ -46,6 +51,11 @@ class TokenTest {
 			"0215733", "0654751"            // OCTA
 	};
 
+	/**
+	 * Tests behavior of the {@link FloatTokenTypeDescriptor} when used with valid integers.
+	 *
+	 * @since 0.1
+	 */
 	@Test
 	void float_integerCorrespond() {
 		for(var value : validIntegers) {
@@ -54,6 +64,11 @@ class TokenTest {
 		}
 	}
 
+	/**
+	 * Tests behavior of the {@link FloatTokenTypeDescriptor} when used with valid floats.
+	 *
+	 * @since 0.1
+	 */
 	@Test
 	void float_floatCorrespond() {
 		for(var value: validFloats) {
@@ -62,11 +77,29 @@ class TokenTest {
 		}
 	}
 
+	/**
+	 * Tests behavior of the {@link IntegerTokenTypeDescriptor} when used with valid integers.
+	 *
+	 * @since 0.1
+	 */
 	@Test
 	void integer_integerCorrespond() {
 		for(var value: validIntegers) {
 			assertTrue(intTTD.mayCorrespond(value), value);
 			assertTrue(intTTD.correspond(value), value);
+		}
+	}
+
+	/**
+	 * Tests behavior of the {@link IntegerTokenTypeDescriptor} when used with valid floats.
+	 *
+	 * @since 0.2
+	 */
+	@Test
+	void integer_floatCorrespond() {
+		for(var value: validFloats) {
+			assertFalse(intTTD.mayCorrespond(value), value);
+			assertFalse(intTTD.correspond(value), value);
 		}
 	}
 }
