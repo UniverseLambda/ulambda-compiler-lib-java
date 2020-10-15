@@ -1,5 +1,4 @@
 token PRINT "PRINT"
-token READ "READ"
 token VAR "VAR"
 token IF "IF"
 token THEN "THEN"
@@ -12,6 +11,7 @@ token PLUS "+"
 token TRUE "true"
 token FALSE "false"
 
+rule universe::lambda::jlcl::Print statement PRINT
 rule universe::lambda::jlcl::SimpleIf statement IF boolexpr THEN statement ENDIF
 rule universe::lambda::jlcl::IfElse statement IF boolexpr THEN statement ELSE statement ENDIF
 rule universe::lambda::jlcl::Assign statement IDENTIFIER "=" valueexpr

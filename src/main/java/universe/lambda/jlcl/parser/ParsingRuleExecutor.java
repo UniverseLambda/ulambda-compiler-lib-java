@@ -24,6 +24,7 @@ import universe.lambda.jlcl.token.Token;
 public interface ParsingRuleExecutor {
     /**
      * Execute a given parsing rule
+     *
      * @param state state object (set by the lib user)
      * @param rule rule linked to this execution
      * @param tokens tokens triggering the rule
