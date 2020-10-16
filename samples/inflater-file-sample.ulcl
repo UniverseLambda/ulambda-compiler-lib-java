@@ -11,18 +11,18 @@ token PLUS "+"
 token TRUE "true"
 token FALSE "false"
 
-rule universe::lambda::jlcl::Print statement PRINT
-rule universe::lambda::jlcl::SimpleIf statement IF boolexpr THEN statement ENDIF
-rule universe::lambda::jlcl::IfElse statement IF boolexpr THEN statement ELSE statement ENDIF
-rule universe::lambda::jlcl::Assign statement IDENTIFIER "=" valueexpr
+rule universe::lambda::jlcl::parser::Print statement PRINT
+rule universe::lambda::jlcl::parser::SimpleIf statement IF boolexpr THEN statement ENDIF
+rule universe::lambda::jlcl::parser::IfElse statement IF boolexpr THEN statement ELSE statement ENDIF
+rule universe::lambda::jlcl::parser::Assign statement IDENTIFIER "=" valueexpr
 
-rule universe::lambda::jlcl::ValueExpr valueexpr IDENTIFIER
-rule universe::lambda::jlcl::ValueExpr valueexpr INTEGER
-rule universe::lambda::jlcl::ValueExpr valueexpr FLOAT
-rule universe::lambda::jlcl::ValueExpr valueexpr STRING
-rule universe::lambda::jlcl::ValueExpr valueexpr CHAR
-rule universe::lambda::jlcl::ValueExpr valueexpr boolexpr
+rule universe::lambda::jlcl::parser::ValueExpr valueexpr IDENTIFIER
+rule universe::lambda::jlcl::parser::ValueExpr valueexpr INTEGER
+rule universe::lambda::jlcl::parser::ValueExpr valueexpr FLOAT
+rule universe::lambda::jlcl::parser::ValueExpr valueexpr STRING
+rule universe::lambda::jlcl::parser::ValueExpr valueexpr CHAR
+rule universe::lambda::jlcl::parser::ValueExpr valueexpr boolexpr
 
-rule universe::lambda::jlcl::BoolExpr boolexpr TRUE
-rule universe::lambda::jlcl::BoolExpr boolexpr FALSE
-rule universe::lambda::jlcl::BoolExpr boolexpr valueexpr == valueexpr
+rule universe::lambda::jlcl::parser::BoolExpr boolexpr TRUE
+rule universe::lambda::jlcl::parser::BoolExpr boolexpr FALSE
+rule universe::lambda::jlcl::parser::BoolExpr boolexpr valueexpr "==" valueexpr

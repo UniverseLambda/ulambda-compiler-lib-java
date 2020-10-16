@@ -20,6 +20,8 @@
 package universe.lambda.jlcl;
 
 import universe.lambda.jlcl.feature.FeatureList;
+import universe.lambda.jlcl.parser.ParserRule;
+import universe.lambda.jlcl.parser.ParserRuleExecutor;
 import universe.lambda.jlcl.token.descriptor.DefinedTokenTypeDescriptor;
 import universe.lambda.jlcl.token.descriptor.TokenTypeDescriptor;
 
@@ -73,6 +75,8 @@ public class LanguageDefinition {
 	 * @since 0.1
 	 */
 	private HashMap<String, TokenTypeDescriptor> descriptors;
+
+	private HashMap<String, ParserRule> parserRules;
 
 	/**
 	 * We don't want people to instantiate it like sane people do.
@@ -151,6 +155,14 @@ public class LanguageDefinition {
 		return descriptors.get(name);
 	}
 
+	public ParserRule getParserRuleByName(String name) {
+		return parserRules.get(name);
+	}
+
+	public ParserRule[] getParserRules() {
+		return parserRules.values().toArray(new ParserRule[0]);
+	}
+
 	/**
 	 * Class used for building a LanguageDefinition.
 	 *
@@ -170,6 +182,8 @@ public class LanguageDefinition {
 		 * @since 0.1
 		 */
 		private HashMap<String, TokenTypeDescriptor> desc = new HashMap<>();
+
+		private HashMap<String, ParserRule> rules = new HashMap<>();
 
 		/**
 		 * Creates a new {@code Builder}. Use the default {@link FeatureList}.
@@ -206,6 +220,16 @@ public class LanguageDefinition {
 			return this;
 		}
 
+		public Builder addParserRule(String name, String[] value, ParserRuleExecutor executor) {
+			addParserRule(new ParserRule(name, value, executor));
+			return this;
+		}
+
+		public Builder addParserRule(ParserRule rule) {
+			rules.put(rule.getName(), rule);
+			return this;
+		}
+
 		/**
 		 * Sets the {@link FeatureList} to use when building the {@link LanguageDefinition}.
 		 *
@@ -234,6 +258,7 @@ public class LanguageDefinition {
 			var def = new LanguageDefinition();
 			// we don't want modifications of this Builder HashMap to modify the LanguageDefinition HashMap.
 			def.descriptors = new HashMap<>(desc);
+			def.parserRules = new HashMap<>(rules);
 			return def;
 		}
 	}

@@ -20,13 +20,12 @@
 package universe.lambda.jlcl;
 
 import universe.lambda.jlcl.feature.FeatureList;
-import universe.lambda.jlcl.parser.ParsingRule;
-import universe.lambda.jlcl.parser.ParsingRuleExecutor;
+import universe.lambda.jlcl.parser.ParserRule;
+import universe.lambda.jlcl.parser.ParserRuleExecutor;
 import universe.lambda.jlcl.token.Token;
 import universe.lambda.jlcl.token.Tokenizer;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -217,12 +216,12 @@ public final class LanguageDefinitionInflater {
 					return null;
 				}
 
-				ParsingRuleExecutor executor;
+				ParserRuleExecutor executor;
 
 				try {
 					var constructor = clazz.getDeclaredConstructor();
 					var tmp = constructor.newInstance();
-					if (!(tmp instanceof ParsingRuleExecutor)) {
+					if (!(tmp instanceof ParserRuleExecutor)) {
 						Logger.fatal(
 								firstClassToken.getSource()
 										+ ":" + firstClassToken.getLine() + ":" + firstClassToken.getColumn()
@@ -231,7 +230,7 @@ public final class LanguageDefinitionInflater {
 										+ "'");
 						return null;
 					}
-					executor = (ParsingRuleExecutor)tmp;
+					executor = (ParserRuleExecutor)tmp;
 				} catch (InstantiationException e) {
 					Logger.fatal(
 							firstClassToken.getSource()
@@ -267,9 +266,7 @@ public final class LanguageDefinitionInflater {
 					return null;
 				}
 
-				ParsingRule rule = new ParsingRule(ruleName, ruleRecipe.toArray(new String[0]), executor);
-
-				// TODO: builder.addParsingRule(ruleName, ruleRecipe.toArray(new String[0]), );
+				builder.addParserRule(ruleName, ruleRecipe.toArray(new String[0]), executor);
 				// We reached the next line token but the for loop will increase i again, so we decrement it.
 				--i;
 			}

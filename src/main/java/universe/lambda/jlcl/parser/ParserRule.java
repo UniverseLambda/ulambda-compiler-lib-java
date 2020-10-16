@@ -19,12 +19,12 @@
 
 package universe.lambda.jlcl.parser;
 
-public class ParsingRule {
+public class ParserRule {
 	private final String name;
 	private final String[] value;
-	private final ParsingRuleExecutor executor;
+	private final ParserRuleExecutor executor;
 
-	public ParsingRule(String name, String[] value, ParsingRuleExecutor executor) {
+	public ParserRule(String name, String[] value, ParserRuleExecutor executor) {
 		this.name = name;
 		this.value = value;
 		this.executor = executor;
@@ -38,7 +38,7 @@ public class ParsingRule {
 		return value;
 	}
 
-	public ParsingRuleExecutor getExecutor() {
+	public ParserRuleExecutor getExecutor() {
 		return executor;
 	}
 }
