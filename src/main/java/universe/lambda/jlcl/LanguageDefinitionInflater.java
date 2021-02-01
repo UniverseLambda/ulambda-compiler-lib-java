@@ -24,6 +24,8 @@ import universe.lambda.jlcl.parser.ParserRule;
 import universe.lambda.jlcl.parser.ParserRuleExecutor;
 import universe.lambda.jlcl.token.Token;
 import universe.lambda.jlcl.token.Tokenizer;
+import universe.lambda.jlcl.token.descriptor.DefinedTokenTypeDescriptor;
+import universe.lambda.jlcl.token.descriptor.TokenTypeDescriptor;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -179,7 +181,7 @@ public final class LanguageDefinitionInflater {
 					classPathBuffer.append('.');
 				}
 
-				Token ruleNameToken = tokens[++i];
+				Token ruleNameToken = tokens[i];
 
 				if (!ruleNameToken.getDescriptor().getName().equals(LanguageDefinition.IDENTIFIER)) {
 					Logger.fatal(
@@ -191,13 +193,45 @@ public final class LanguageDefinitionInflater {
 					return null;
 				}
 
-				String ruleName = tokens[++i].getValue();
+				String ruleName = ruleNameToken.getValue();
+				System.out.println("classPath: " + classPathBuffer.toString());
+				System.out.println("Rule name tk: " + ruleName);
 
 				var ruleRecipe = new ArrayList<String>();
 
-				while (tokens[i].getDescriptor().getName().equals(LanguageDefinition.IDENTIFIER)) {
-					ruleRecipe.add(tokens[i].getValue());
-					++i;
+				while (++i < tokens.length) {
+					String value = null;
+
+					String name = tokens[i].getDescriptor().getName();
+					if (name.equals(LanguageDefinition.IDENTIFIER)) {
+						value = tokens[i].getValue();
+					} else if (name.equals(LanguageDefinition.STRING)) {
+						TokenTypeDescriptor[] descriptors = builder.desc.values().toArray(new TokenTypeDescriptor[0]);
+						for (var curr: descriptors) {
+							if (!(curr instanceof DefinedTokenTypeDescriptor)) {
+								continue;
+							}
+
+							String tkValue = tokens[i].getValue();
+							if (curr.correspond(tkValue.substring(1, tkValue.length() - 1))) {
+								value = curr.getName();
+								break;
+							}
+						}
+
+						if (value == null) {
+							Logger.fatal(
+									tokens[i].getSource()
+											+ ":" + tokens[i].getLine() + ":" + tokens[i].getColumn()
+											+ ": could not find token type from literal value '"
+											+ tokens[i].getValue()
+											+ "'");
+							return null;
+						}
+					} else {
+						break;
+					}
+					ruleRecipe.add(value);
 				}
 
 				Class<?> clazz;

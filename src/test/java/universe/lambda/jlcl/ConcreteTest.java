@@ -20,6 +20,7 @@
 package universe.lambda.jlcl;
 
 import org.junit.jupiter.api.Test;
+import universe.lambda.jlcl.parser.Parser;
 import universe.lambda.jlcl.token.Token;
 import universe.lambda.jlcl.token.Tokenizer;
 
@@ -36,41 +37,45 @@ import static org.junit.jupiter.api.Assertions.*;
  * @since 0.2
  */
 public class ConcreteTest {
-    /**
-     * Tests the inflater.
-     *
-     * @since 0.2
-     */
-    @Test
-    void inflaterTest() {
-        Logger.name = "Inflater";
-        Logger.minimumLogLevel = Logger.LogLevel.DEBUG;
+	/**
+	 * Tests the inflater.
+	 *
+	 * @since 0.2
+	 */
+	@Test
+	void inflaterTest() {
+		Logger.name = "Inflater";
+		Logger.minimumLogLevel = Logger.LogLevel.DEBUG;
 
-        Path conf = Paths.get("samples/inflater-file-sample.ulcl");
-        assertTrue(Files.isRegularFile(conf));
+		Path conf = Paths.get("samples/inflater-file-sample.ulcl");
+		assertTrue(Files.isRegularFile(conf));
 
-        Path target = Paths.get("samples/test-sample");
-        assertTrue(Files.isRegularFile(target));
+		Path target = Paths.get("samples/test-sample");
+		assertTrue(Files.isRegularFile(target));
 
-        var def = LanguageDefinitionInflater.inflate(conf);
-        assertNotNull(def);
+		var def = LanguageDefinitionInflater.inflate(conf);
+		assertNotNull(def);
 
-        Token[] tokens = null;
+		Token[] tokens = null;
 
-        try (var reader = Files.newBufferedReader(target)){
-            Tokenizer tokenizer = new Tokenizer(def, reader, conf.toString());
-            tokens = tokenizer.readAllTokens();
-        } catch (IOException e) {
-            e.printStackTrace();
-            fail();
-        }
+		try (var reader = Files.newBufferedReader(target)){
+			Tokenizer tokenizer = new Tokenizer(def, reader, conf.toString());
+			tokens = tokenizer.readAllTokens();
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail();
+		}
 
-        assertNotNull(tokens);
+		assertNotNull(tokens);
 
-        var count = 0;
+		var count = 0;
 
-        for(var token: tokens) {
-            System.out.println("Token " + count++ + ": " + token.getValue());
-        }
-    }
+		for(var token: tokens) {
+			System.out.println("Token " + count++ + ": " + token.getValue());
+		}
+
+		System.out.println("Parsing...");
+		var parser = new Parser(def, null);
+		assertTrue(parser.parse(tokens));
+	}
 }

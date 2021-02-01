@@ -32,7 +32,7 @@ import java.util.ArrayList;
  *
  * @since 0.1
  */
-public class Tokenizer {
+public class Tokenizer implements TokenSource {
 	/**
 	 * {@code Tokenizer} mode in which the Tokenizer keeps accumulating code points since it cannot issue a
 	 * {@link Token}, but accumulating more code points may produce a {@code Token}.

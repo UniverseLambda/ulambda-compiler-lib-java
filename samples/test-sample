@@ -1,9 +1,11 @@
+PROGRAM
+
 PRINT "Hello World!";
 VAR input = READ;
 IF input == "Hello World!" THEN
     PRINT "You're nice!";
-ELSE
-    PRINT "OKAYY";
 ENDIF
 VAR addition = 5 + 3.0F;
 PRINT "5 + 3.0F = " + addition + '!';
+
+BYE

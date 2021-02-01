@@ -2,10 +2,10 @@ package universe.lambda.jlcl.parser;
 
 import universe.lambda.jlcl.token.Token;
 
-public class SimpleIf implements ParserRuleExecutor {
+public class Library implements ParserRuleExecutor {
 	@Override
 	public Token execute(Object state, ParserRule rule, Token[] tokens) {
-		System.out.println("SimpleIf with tokens: ");
+		System.out.println("Library with tokens: ");
 		for (Token token : tokens) {
 			System.out.print(" * \"");
 			System.out.print(token.getValue());

@@ -25,7 +25,10 @@ import universe.lambda.jlcl.parser.ParserRuleExecutor;
 import universe.lambda.jlcl.token.descriptor.DefinedTokenTypeDescriptor;
 import universe.lambda.jlcl.token.descriptor.TokenTypeDescriptor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Immutable object containing definition of a language: it is used by components of this library to do work.
@@ -76,7 +79,7 @@ public class LanguageDefinition {
 	 */
 	private HashMap<String, TokenTypeDescriptor> descriptors;
 
-	private HashMap<String, ParserRule> parserRules;
+	private ParserRule[] parserRules;
 
 	/**
 	 * We don't want people to instantiate it like sane people do.
@@ -155,12 +158,20 @@ public class LanguageDefinition {
 		return descriptors.get(name);
 	}
 
-	public ParserRule getParserRuleByName(String name) {
-		return parserRules.get(name);
+	public ParserRule[] getParserRulesByName(String name) {
+		List<ParserRule> rules = new ArrayList<>();
+
+		for (var rule: parserRules) {
+			if (rule.getName().equals(name)) {
+				rules.add(rule);
+			}
+		}
+
+		return rules.toArray(new ParserRule[0]);
 	}
 
 	public ParserRule[] getParserRules() {
-		return parserRules.values().toArray(new ParserRule[0]);
+		return Arrays.copyOf(parserRules, parserRules.length);
 	}
 
 	/**
@@ -181,9 +192,9 @@ public class LanguageDefinition {
 		 *
 		 * @since 0.1
 		 */
-		private HashMap<String, TokenTypeDescriptor> desc = new HashMap<>();
+		HashMap<String, TokenTypeDescriptor> desc = new HashMap<>();
 
-		private HashMap<String, ParserRule> rules = new HashMap<>();
+		private List<ParserRule> rules = new ArrayList<>();
 
 		/**
 		 * Creates a new {@code Builder}. Use the default {@link FeatureList}.
@@ -226,7 +237,11 @@ public class LanguageDefinition {
 		}
 
 		public Builder addParserRule(ParserRule rule) {
-			rules.put(rule.getName(), rule);
+			System.out.println("Add rule: " + rule.getName());
+			for (var val: rule.getValue()) {
+				System.out.println(" * " + val);
+			}
+			rules.add(rule);
 			return this;
 		}
 
@@ -258,7 +273,7 @@ public class LanguageDefinition {
 			var def = new LanguageDefinition();
 			// we don't want modifications of this Builder HashMap to modify the LanguageDefinition HashMap.
 			def.descriptors = new HashMap<>(desc);
-			def.parserRules = new HashMap<>(rules);
+			def.parserRules = rules.toArray(new ParserRule[0]);
 			return def;
 		}
 	}
